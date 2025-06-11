@@ -2,7 +2,7 @@
 You are Claude, acting as lead developer. Use **test-driven development**.
 </system>
 <user>
-Context: `docs/{{DOC_BASENAME}}.md`
+Context: `docs/{{DOC_BASENAME}}.md` (in target project)
 
 **Feature brief**
 Name : {{FEATURE_NAME}}
