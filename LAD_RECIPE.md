@@ -31,7 +31,7 @@
     └── extensions.json             # optional helpers
 ```
 
-Drop `prompts/` + `.copilot‑instructions.md` into any repo.
+Import the complete `.lad/` directory into any target project once on main.
 
 * Target Python 3.11.
 * Commit messages follow Conventional Commits.
@@ -41,18 +41,18 @@ Drop `prompts/` + `.copilot‑instructions.md` into any repo.
 ## 2 Quick‑Setup Checklist
 
 1. Enable **Copilot Chat + Agent Mode** in VS Code.
-2. Create **feature branch**:
-   ```bash
-   git checkout -b feat/<slug>
-   ```
-3. Install helper extensions (Python, Test Explorer, Coverage Gutters, Flake8).
-4. **Import LAD kit (copy‑only)**:
+2. **Import LAD kit once on main** (copy‑only):
    ```bash
    git clone --depth 1 https://github.com/chrisfoulon/LAD tmp \
      && rm -rf tmp/.git \
-     && mv tmp .lad
+     && mv tmp .lad \
+     && git add .lad && git commit -m "feat: add LAD framework"
    ```
-   Commit `.lad/` once (Copilot Kick‑off runs this automatically if missing).
+3. Install helper extensions (Python, Test Explorer, Coverage Gutters, Flake8).
+4. Create **feature branch**:
+   ```bash
+   git checkout -b feat/<slug>
+   ```
 5. Open relevant files so Copilot sees context.
 
 ---

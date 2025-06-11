@@ -19,9 +19,10 @@ LAD lets GitHub Copilot + Claude implement complex Python features *iteratively*
 git clone https://github.com/yourorg/your-project.git
 cd your-project
 
-# Import LAD kit (copy-only, no Git dependency)
+# Import LAD kit once on main (copy-only, no Git dependency)
 git clone --depth 1 https://github.com/chrisfoulon/LAD tmp \
-  && rm -rf tmp/.git && mv tmp .lad
+  && rm -rf tmp/.git && mv tmp .lad \
+  && git add .lad && git commit -m "feat: add LAD framework"
 
 # Start your first feature
 git checkout -b feat/my-feature

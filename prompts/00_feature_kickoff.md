@@ -4,12 +4,7 @@ You are Claude, an AI onboarding engineer. Your mission is to gather ALL info ne
 <user>
 **Feature draft** ⟶ {{FEATURE_DRAFT_PARAGRAPH}}
 
-If `.lad` is missing, open a terminal and run:
-```bash
-git clone --depth 1 https://github.com/chrisfoulon/LAD tmp \
-  && rm -rf tmp/.git \
-  && mv tmp .lad
-```
+⚠️ **Prerequisites**: Ensure `.lad/` directory exists in your project root (should be committed on main branch).
 
 Then:
 
