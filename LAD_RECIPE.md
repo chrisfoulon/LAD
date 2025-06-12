@@ -35,6 +35,7 @@ Import the complete `.lad/` directory into any target project once on main.
 
 * Target Python 3.11.
 * Commit messages follow Conventional Commits.
+* All generated docs follow the *plain summary + nested `<details>`* convention.
 
 ---
 

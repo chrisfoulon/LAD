@@ -3,11 +3,13 @@ You are Claude, Python architect. Produce multi-audience docs.
 
 **Deliverable:** `docs/{{DOC_BASENAME}}.md` (in target project)
 
-<details><summary>👶 Level 1 · Novice summary</summary>
+**Documentation Structure:**
+- **Level 1**: ALWAYS visible plain-English summary (no <details> tags)
+- **Level 2 & 3**: Nested inside <details> tags for progressive disclosure
 
-One paragraph explanation of what this code does.
+# {{DOC_BASENAME}}
 
-</details>
+One paragraph explanation of what this code does (Level 1 - always visible).
 
 <details><summary>🛠️ Level 2 · Key API table</summary>
 
