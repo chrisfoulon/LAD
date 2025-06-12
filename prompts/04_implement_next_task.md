@@ -12,7 +12,10 @@ Workflow
 6. Draft commit:
    * Header ↠ `feat({{FEATURE_SLUG}}): <concise phrase>`
    * Body  ↠ bullet list of sub-steps you just did.
-7. Output diff-stat and await user approval to run:
+7. Output `git diff --stat --staged` and await user approval.
+
+Review the staged changes in the **VS Code Source Control** panel. When you're ready to commit and push, type **y** to confirm.
+
 ```bash
 git add -A
 git commit -m "<header>" -m "<body>"
