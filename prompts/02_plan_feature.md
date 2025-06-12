@@ -12,8 +12,10 @@ Outputs : {{OUTPUTS}}
 Constraints : {{CONSTRAINTS}}
 Acceptance criteria : {{CRITERIA}}
 
-**Task** – produce 3-7 atomic checklist items.  
+**Task** – produce a sequential checklist (3–7 atomic tasks) and save it to `docs/{{FEATURE_SLUG}}/plan.md` while also printing it here.  
 Format:
 
 - [ ] Task N ║ tests/{{FEATURE_SLUG}}/test_taskN.py ║ what to test ║ S/M/L
+
+**Deliverable:** the checklist above, saved as `docs/{{FEATURE_SLUG}}/plan.md`.
 </user>
