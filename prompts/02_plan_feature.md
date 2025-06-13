@@ -29,17 +29,32 @@ Produce a top-level checklist **(3–7 atomic tasks)**, print it here, **and sav
     - [ ] 1.1.a …  (optional deeper level)
   ```
 
-* **Hidden rationale**  
-  Prepend a `<reasoning>` block (it will be stripped before commit) with one paragraph explaining *why* this plan is sound.
+*After generating the top-level checklist, append the following block to the same Markdown file*:
 
-* **Resources** – bullet list of files to open, external APIs or libs.
+```
+<details><summary>📝 Extended Details (for ChatGPT / humans)</summary>
 
-* **Risks & Mitigations** – bullet list of likely pitfalls and fixes.
+### Rationale
+<reasoning>One-paragraph hidden rationale goes here.</reasoning>
 
-* **Acceptance-Checks** – table: test-file ║ key assertion ║ metric  
-  (e.g. `flake8` < 10 cyclomatic, `MAPE < 0.1`, runtime ≤ 30 s).
+### Resources
+- Files to open: …
+- External APIs / libs: …
+
+### Risks & Mitigations
+- 🚨 Risk A – Mitigation  
+- Risk B – …
+
+### Acceptance-Checks
+| Test file                                   | Assertion                       | Metric                |
+|---------------------------------------------|---------------------------------|-----------------------|
+| tests/{{FEATURE_SLUG}}/test_task1.py        | Returns correct output          | flake8 < 10           |
+| …                                           | …                               | runtime ≤ 30 s        |
+
+</details>
+```
 
 ---
 
-**Deliverable** : the full plan printed above **and** written to `docs/{{FEATURE_SLUG}}/plan.md`.
+**Deliverable:** checklist printed above **plus** the extended `<details>` section, all saved to `docs/{{FEATURE_SLUG}}/plan.md`.
 </user>
