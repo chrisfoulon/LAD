@@ -23,6 +23,8 @@
 │   ├── 01_context_gathering.md
 │   ├── 02_plan_feature.md
 │   ├── 03_review_plan.md
+│   ├── 03_chatgpt_review.md
+│   ├── 03b_integrate_review.md
 │   ├── 04_implement_next_task.md
 │   ├── 05_code_review_package.md
 │   └── 06_self_review_with_chatgpt.md
@@ -65,7 +67,8 @@ Import the complete `.lad/` directory into any target project once on main.
 | 0 | **Kick‑off** · import kit & gather clarifications                  | `00_feature_kickoff.md`                                |
 | 1 | Gather context → multi‑level docs                                  | `01_context_gathering.md`                              |
 | 2 | Draft test‑driven plan                                             | `02_plan_feature.md`                                   |
-| 3 | Dual plan review (Claude + ChatGPT)                                | `03_review_plan.md` / `06_self_review_with_chatgpt.md` |
+| 3 | Dual plan review (Claude + ChatGPT)                                | `03_review_plan.md` / `03_chatgpt_review.md`           |
+| 3b| Integrate Copilot & ChatGPT reviews                                | `03b_integrate_review.md`                              |
 | 4 | Implement **next** task → commit & push                            | `04_implement_next_task.md`                            |
 | 5 | Compile review bundle → ChatGPT                                    | `05_code_review_package.md`                            |
 | 6 | **Open PR** via `gh pr create`                                     | (shell)                                                |
