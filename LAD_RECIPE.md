@@ -71,9 +71,10 @@ Import the complete `.lad/` directory into any target project once on main.
 | 3b| Integrate Copilot & ChatGPT reviews                                | `03b_integrate_review.md`                              |
 | 3c| ChatGPT cross-validation                                           | `03_chatgpt_review.md`                                 |
 | 4 | Implement **next** task → commit & push                            | `04_implement_next_task.md`                            |
-| 5 | Compile review bundle → ChatGPT                                    | `05_code_review_package.md`                            |
-| 6 | **Open PR** via `gh pr create`                                     | (shell)                                                |
-| 7 | **Squash‑merge & delete branch** via `gh pr merge --delete-branch` | (shell)                                                |
+| 5 | ChatGPT self-review (optional)                                     | `06_self_review_with_chatgpt.md`                       |
+| 6 | Compile review bundle → ChatGPT                                    | `05_code_review_package.md`                            |
+| 7 | **Open PR** via `gh pr create`                                     | (shell)                                                |
+| 8 | **Squash‑merge & delete branch** via `gh pr merge --delete-branch` | (shell)                                                |
 
 ### 3.4 Iterative Implementation Loop
 

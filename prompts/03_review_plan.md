@@ -26,4 +26,9 @@ If you need more space, add an optional `<details><summary>Extended notes</summa
 
 <user>
 Please audit the TDD plan shown above and respond using the format specified.
+
+**Persist review**  
+Write this entire review to `docs/{{FEATURE_SLUG}}/review_copilot.md`
+
+**Deliverable**: Printed review + saved file.
 </user>

@@ -8,7 +8,9 @@ Workflow
 2. Modify minimal code to pass new test without breaking existing ones.
 3. Ensure NumPy-style docstrings on all additions.
 4. Run `pytest -q` repeatedly until green.
-5. Update `docs/{{DOC_BASENAME}}.md` (in target project - Level 2 table row + any Level 3 snippets) and tick the checklist.
+5. **Update docs**:
+   • If `SPLIT=true` → update any `docs/{{DOC_BASENAME}}_*` files you previously created.
+   • Else → update `docs/{{DOC_BASENAME}}.md`
 6. Draft commit:
    * Header ↠ `feat({{FEATURE_SLUG}}): <concise phrase>`
    * Body  ↠ bullet list of sub-steps you just did.

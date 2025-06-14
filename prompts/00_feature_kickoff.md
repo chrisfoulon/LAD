@@ -13,4 +13,9 @@ Then:
 3. Detect obvious design forks (e.g. *pathlib* vs *os*) and ask me to choose.
 4. When nothing is missing reply **READY** and output the variable map (e.g. `FEATURE_SLUG=…`) so you can substitute all `{{…}}` placeholders in future steps.
 
+**Persist variables**  
+Save the map above to `docs/{{FEATURE_SLUG}}/feature_vars.md` (create folders if missing).
+
+**Deliverable**: Variable map printed + saved to feature_vars.md file.
+
 </user>
