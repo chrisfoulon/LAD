@@ -5,7 +5,7 @@ Implement the **next unchecked task** only.
 
 **Workflow**
 1. **Write the failing test first.**  
-   • If you need to store intermediate notes or dependency maps, write them to `.lad/_scratch/{{FEATURE_SLUG}}.md` and reference this file in subsequent sub-tasks.  
+   • If you need to store intermediate notes or dependency maps, write them to `docs/_scratch/{{FEATURE_SLUG}}.md` and reference this file in subsequent sub-tasks.  
    • If the next sub-task will touch >200 lines of code or >10 files, break it into 2–5 indented sub-sub-tasks in the plan, commit that plan update, then proceed with implementation.
 
 2. **Modify minimal code** to pass the new test without breaking existing ones.  
