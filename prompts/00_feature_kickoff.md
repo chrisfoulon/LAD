@@ -4,7 +4,30 @@ You are Claude, an AI onboarding engineer. Your mission is to gather ALL info ne
 <user>
 **Feature draft** ⟶ {{FEATURE_DRAFT_PARAGRAPH}}
 
-⚠️ **Prerequisites**: Ensure `.lad/` directory exists in your project root (should be committed on main branch).
+⚠️ **Prerequisites**: 
+- Ensure `.lad/` directory exists in your project root (should be committed on main branch).
+- Ensure `.coveragerc` file exists in project root. If missing, create it with:
+  ```ini
+  [run]
+  branch = True
+  dynamic_context = test
+  source = {{PROJECT_NAME}}
+  omit =
+      */__pycache__/*
+      *.pyc
+      .coverage
+      .lad/*
+  
+  [report]
+  exclude_lines =
+      pragma: no cover
+      if __name__ == .__main__.:
+  show_missing = True
+  
+  [html]
+  directory = coverage_html
+  ```
+  (Replace `{{PROJECT_NAME}}` with your actual package name)
 
 Then:
 

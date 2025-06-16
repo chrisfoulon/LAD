@@ -1,6 +1,9 @@
 # LLM‑Assisted‑Development (LAD) Framework
 
-> **Goal**  Provide a repeatable recipe and ready‑to‑paste prompt templates so you can ask **GitHub Copilot Claude Agent** (in VS Code) to:
+> **Goal**  Provide a repeatable recipe**Guardrails:** The **04_implement_next_task.md** prompt now includes:
+  - A **Scope Guard** to only touch code required by the current failing test.
+  - **Forbidden Actions** that prevent deletion of existing functions/classes unless they are 0% covered *and* absent from docs, with an explicit "Delete <name>? (y/n)" confirmation.
+  - A prompt for the user to run coverage **outside VS Code**, then verify 0% coverage and Level-2 API docs before any removal. ready‑to‑paste prompt templates so you can ask **GitHub Copilot Claude Agent** (in VS Code) to:
 >
 > 1. **Understand** a target slice of a large Python code‑base.
 > 2. **Plan** a feature via test‑driven, step‑wise decomposition.
@@ -50,7 +53,11 @@ Import the complete `.lad/` directory into any target project once on main.
      && rm -rf tmp/.git \
      && mv tmp .lad \
      && git add .lad && git commit -m "feat: add LAD framework"
-   ```
+   ```   * **Initialize coverage**: if `.coveragerc` is missing, scaffold it as above (branch=True, dynamic_context=test, omit `.lad/*`, show_missing=True, HTML dir `coverage_html`), then **manually** run:
+     ```bash
+     python -m pytest --cov={{PROJECT_NAME}} --cov-context=test -q && coverage html -d coverage_html
+     ```
+     in your external shell. Confirm back to Copilot with **coverage complete** before any deletion checks.
 3. Install helper extensions (Python, Test Explorer, Coverage Gutters, Flake8).
 4. Create **feature branch**:
    ```bash
@@ -67,7 +74,7 @@ Import the complete `.lad/` directory into any target project once on main.
 | 0 | **Kick‑off** · import kit & gather clarifications                  | `00_feature_kickoff.md`                                |
 | 1 | Gather context → multi‑level docs                                  | `01_context_gathering.md`                              |
 | 2 | Draft test‑driven plan                                             | `02_plan_feature.md`                                   |
-| 3 | Claude plan review                                                  | `03_review_plan.md`                                    |
+| 3 | Claude plan review                                                 | `03_review_plan.md`                                    |
 | 3b| Integrate Copilot & ChatGPT reviews                                | `03b_integrate_review.md`                              |
 | 3c| ChatGPT cross-validation                                           | `03_chatgpt_review.md`                                 |
 | 4 | Implement **next** task → commit & push                            | `04_implement_next_task.md`                            |
@@ -77,6 +84,11 @@ Import the complete `.lad/` directory into any target project once on main.
 | 8 | **Squash‑merge & delete branch** via `gh pr merge --delete-branch` | (shell)                                                |
 
 ### 3.4 Iterative Implementation Loop
+
+**Guardrails:** The **04_implement_next_task.md** prompt now includes:
+  - A **Scope Guard** to only touch code required by the current failing test.
+  - **Forbidden Actions** that prevent deletion of existing functions/classes unless they are 0% covered *and* absent from docs, with an explicit “Delete <name>? (y/n)” confirmation.
+  - A prompt for the user to run coverage **outside VS Code**, then verify 0 % coverage and doc absence before deletion.
 
 For each unchecked box:
 
