@@ -15,6 +15,8 @@ Goal: create concise, multi-audience docs for the code in scope.
 * **Level 3 (annotated snippets)** – inside Level 2 `<details>`; include code only for symbols that the current feature or variable map references.  
 * Prepend a hidden `<reasoning>` block (stripped before commit) explaining why the selected APIs/snippets are most relevant.
 
+* ⚠ When SPLIT=true, include coverage context link: \coverage_html/index.html so future steps can decide usefulness.
+
 Formatting rules  
 * Use **NumPy-style docstring** markup in examples.  
 * Do **not** modify source code.  
