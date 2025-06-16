@@ -53,9 +53,9 @@ Import the complete `.lad/` directory into any target project once on main.
      && rm -rf tmp/.git \
      && mv tmp .lad \
      && git add .lad && git commit -m "feat: add LAD framework"
-   ```   * **Initialize coverage**: if `.coveragerc` is missing, scaffold it as above (branch=True, dynamic_context=test, omit `.lad/*`, show_missing=True, HTML dir `coverage_html`), then **manually** run:
+   ```   * **Initialize coverage**: if `.coveragerc` is missing, scaffold it as above (branch=True, dynamic_context=test_function, omit `.lad/*`, show_missing=True, HTML dir `coverage_html`), then **manually** run:
      ```bash
-     python -m pytest --cov={{PROJECT_NAME}} --cov-context=test -q && coverage html -d coverage_html
+     coverage run -m pytest [test_files] -q && coverage html
      ```
      in your external shell. Confirm back to Copilot with **coverage complete** before any deletion checks.
 3. Install helper extensions (Python, Test Explorer, Coverage Gutters, Flake8).

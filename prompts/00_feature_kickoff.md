@@ -10,7 +10,7 @@ You are Claude, an AI onboarding engineer. Your mission is to gather ALL info ne
   ```ini
   [run]
   branch = True
-  dynamic_context = test
+  dynamic_context = test_function
   source = {{PROJECT_NAME}}
   omit =
       */__pycache__/*
