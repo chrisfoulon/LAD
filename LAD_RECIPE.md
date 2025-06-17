@@ -96,13 +96,14 @@ For each unchecked box:
 2. Agent writes failing test → passes it → updates docs.
 3. At the end of each main task, Copilot runs flake8 (complexity ≤ 10) and a quick coverage snapshot. You decide whether to fix issues before committing.
 4. **Radon audit:** At each main-task boundary, run `radon raw` and `radon mi`. If SLOC > 500 or MI < 65, Copilot suggests refactoring before proceeding.
-5. Drafts Conventional‑Commit header + bullet body, then awaits approval to:
+5. **Incremental refactoring**: For large modules (>500 LoC), Copilot extracts 200–300 LoC at a time into new sub-modules, commits, and then continues.
+6. Drafts Conventional‑Commit header + bullet body, then awaits approval to:6. Drafts Conventional‑Commit header + bullet body, then awaits approval to:
    ```bash
    git add -A
    git commit -m "<header>" -m "<body bullets>"
    git push -u origin HEAD
    ```
-6. Repeat until checklist is complete.
+7. Repeat until checklist is complete.
 
 ---
 
