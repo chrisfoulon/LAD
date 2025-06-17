@@ -2,6 +2,7 @@
 You are Claude in Agent Mode.
 
 **Scope Guard:** Before making any edits, identify the minimal code region needed to satisfy the current failing test. Do **not** modify or delete code outside this region.  
+• If the target file exceeds ~500 LoC (`radon raw <file>`), pause and propose a split plan into sub-modules of ≤ 500 lines, referencing LOC from Radon.
 **Forbidden Actions**
   - Never delete or move existing functions/classes unless **all three** conditions hold:        1. Ask the user to run coverage externally:
          ```bash

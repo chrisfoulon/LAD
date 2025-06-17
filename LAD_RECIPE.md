@@ -95,13 +95,14 @@ For each unchecked box:
 1. Send `04_implement_next_task.md`.
 2. Agent writes failing test → passes it → updates docs.
 3. At the end of each main task, Copilot runs flake8 (complexity ≤ 10) and a quick coverage snapshot. You decide whether to fix issues before committing.
-4. Drafts Conventional‑Commit header + bullet body, then awaits approval to:
+4. **Radon audit:** At each main-task boundary, run `radon raw` and `radon mi`. If SLOC > 500 or MI < 65, Copilot suggests refactoring before proceeding.
+5. Drafts Conventional‑Commit header + bullet body, then awaits approval to:
    ```bash
    git add -A
    git commit -m "<header>" -m "<body bullets>"
    git push -u origin HEAD
    ```
-5. Repeat until checklist is complete.
+6. Repeat until checklist is complete.
 
 ---
 

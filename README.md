@@ -40,6 +40,16 @@ code .lad/prompts/00_feature_kickoff.md   # paste into Copilot Chat
 - Python 3.11+
 - `gh` CLI for PR management (optional)
 
+## Code Quality Setup
+
+LAD uses several tools to maintain code quality. Install them once per project:
+
+```bash
+pip install flake8 pytest coverage radon flake8-radon black
+```
+
+The LAD workflow will guide you through creating `.flake8` and `.coveragerc` configuration files during the kickoff process.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE.md).

@@ -25,9 +25,23 @@ You are Claude, an AI onboarding engineer. Your mission is to gather ALL info ne
   show_missing = True
   
   [html]
-  directory = coverage_html
-  ```
+  directory = coverage_html  ```
   (Replace `{{PROJECT_NAME}}` with your actual package name)
+
+- Ensure `.flake8` file exists in project root. If missing, create it with:
+  ```ini
+  [flake8]
+  max-complexity = 10
+  radon-max-cc = 10
+  exclude = 
+      __pycache__,
+      .git,
+      .lad,
+      .venv,
+      venv,
+      build,
+      dist
+  ```
 
 Then:
 
