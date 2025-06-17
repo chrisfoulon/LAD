@@ -32,10 +32,13 @@ Implement the **next unchecked task** only.
    • **Check the box** in your plan file (`docs/{{FEATURE_SLUG}}/plan.md`): change the leading `- [ ]` on the task (and any completed sub-steps) you just implemented to `- [x]`.  
    • **Update documentation**:
      - In each modified source file, ensure any new or changed functions/classes have NumPy-style docstrings.
-     - If you've added new public APIs, append their signature/purpose to the Level 2 API table in your context doc(s).
-     - Save all doc files (`docs/{{DOC_BASENAME}}.md` or split docs).
+     - If you've added new public APIs, append their signature/purpose to the Level 2 API table in your context doc(s).     - Save all doc files (`docs/{{DOC_BASENAME}}.md` or split docs).
 
-6. **Draft commit**:  
+5.5 **Quality Gate**  
+   • Run flake8 and quick coverage as described in .copilot-instructions.md.  
+   • If violations or low coverage, pause and show first 10 issues, ask user whether to fix now.
+
+6. **Draft commit**:
    * Header ↠ `feat({{FEATURE_SLUG}}): <concise phrase>`  ← **one sub-task only**  
    * Body   ↠ bullet list of the sub-steps you just did.
 
