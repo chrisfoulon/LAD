@@ -75,13 +75,31 @@ Import the complete `.lad/` directory into any target project once on main.
 | 1 | Gather context → multi‑level docs                                  | `01_context_gathering.md`                              |
 | 2 | Draft test‑driven plan                                             | `02_plan_feature.md`                                   |
 | 3 | Claude plan review                                                 | `03_review_plan.md`                                    |
-| 3b| Integrate Copilot & ChatGPT reviews                                | `03b_integrate_review.md`                              |
+| 3b| Integrate Copilot & ChatGPT reviews + evaluate plan splitting      | `03b_integrate_review.md`                              |
 | 3c| ChatGPT cross-validation                                           | `03_chatgpt_review.md`                                 |
-| 4 | Implement **next** task → commit & push                            | `04_implement_next_task.md`                            |
+| 4 | Implement **next** task → commit & push (supports sub-plans)       | `04_implement_next_task.md`                            |
 | 5 | ChatGPT self-review (optional)                                     | `06_self_review_with_chatgpt.md`                       |
 | 6 | Compile review bundle → ChatGPT                                    | `05_code_review_package.md`                            |
 | 7 | **Open PR** via `gh pr create`                                     | (shell)                                                |
 | 8 | **Squash‑merge & delete branch** via `gh pr merge --delete-branch` | (shell)                                                |
+
+### 3.3b Plan Splitting for Complex Features
+
+**When plan complexity becomes unmanageable** (>6 tasks, >25-30 sub-tasks, mixed domains), the `03b_integrate_review.md` prompt automatically evaluates for plan splitting:
+
+**Splitting Benefits:**
+- **Foundation-First**: Core models and infrastructure implemented first
+- **Domain Separation**: Security, performance, and API concerns handled separately  
+- **Context Inheritance**: Each sub-plan builds on previous implementations
+- **Manageable Scope**: Each sub-plan stays ≤6 tasks, ≤25 sub-tasks
+
+**Sub-Plan Structure:**
+- `plan_0a_foundation.md` - Core models, job management, infrastructure
+- `plan_0b_{{domain}}.md` - Business logic, pipeline integration
+- `plan_0c_interface.md` - API endpoints, external interfaces  
+- `plan_0d_security.md` - Security, performance, compatibility
+
+**Context Evolution:** As each sub-plan completes, context files for subsequent sub-plans are updated with new APIs, interfaces, and integration points, ensuring later phases have complete system visibility.
 
 ### 3.4 Iterative Implementation Loop
 
