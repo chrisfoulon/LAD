@@ -8,7 +8,7 @@ Generate `review_{{FEATURE_SLUG}}.md` containing:
 2. Diff-stat of this branch vs main
 3. Key code blocks (+ inline comments)
 4. Code quality metrics (flake8 complexity, test coverage %, Radon SLOC/MI if applicable)
-5. Tests added / updated
+5. Tests added / updated (note testing strategy: integration for APIs, unit for business logic)
 6. Known limitations or TODOs
 7. Links to relevant docs
 

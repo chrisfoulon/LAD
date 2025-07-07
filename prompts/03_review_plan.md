@@ -6,7 +6,7 @@ Checklist for your review  (max 300 words):
 1. **Completeness** – does every acceptance criterion map to at least one task?
 2. **Dependency Order** – are tasks sequenced so each prerequisite is met?
 3. **Hidden Risks & Edge-Cases** – concurrency, large files, external API throttling, etc.
-4. **Test Coverage Gaps** – missing negative tests, boundary conditions, performance budgets.
+4. **Test Coverage Gaps** – missing negative tests, boundary conditions, performance budgets. Verify appropriate testing strategy (integration for APIs, unit for business logic).
 5. **Complexity & Maintainability** – will the plan exceed flake8 `--max-complexity 10` or create God functions?
 6. **Security / Privacy** – any obvious injection, deserialisation, or PII leaks?
 7. **Resource Check** – are all referenced files/APIs accessible? note any unknowns.

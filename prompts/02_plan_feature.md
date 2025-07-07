@@ -51,6 +51,12 @@ Produce a top-level checklist **(3–7 atomic tasks)**, print it here, **and sav
 | tests/{{FEATURE_SLUG}}/test_task1.py        | Returns correct output          | flake8 < 10           |
 | …                                           | …                               | runtime ≤ 30 s        |
 
+### Testing Strategy
+**For each task, specify the appropriate testing approach:**
+- **API/Web Service tasks**: Integration testing (real app + mocked external deps)
+- **Business Logic tasks**: Unit testing (complete isolation)
+- **Data Processing tasks**: Unit testing (minimal deps + fixtures)
+
 </details>
 ```
 

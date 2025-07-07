@@ -36,6 +36,11 @@ Implement the **next unchecked task** only from the current sub-plan.
 
 **Workflow**
 1. **Write the failing test first.**  
+   **Testing Strategy by Component Type:**
+   • **API Endpoints & Web Services**: Use integration testing - import the real FastAPI/Django app, mock only external dependencies (databases, APIs, file systems). Test actual HTTP routing, validation, serialization, and error handling.
+   • **Business Logic & Algorithms**: Use unit testing - mock all dependencies, test logic in complete isolation, focus on edge cases.
+   • **Data Processing & Utilities**: Use unit testing with minimal dependencies, use test data fixtures.
+   
    • If you need to store intermediate notes or dependency maps, write them to `docs/_scratch/{{FEATURE_SLUG}}.md` and reference this file in subsequent sub-tasks.  
    • If the next sub-task will touch >200 lines of code or >10 files, break it into 2–5 indented sub-sub-tasks in the plan, commit that plan update, then proceed with implementation.
 

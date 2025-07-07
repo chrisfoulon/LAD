@@ -7,6 +7,7 @@ LAD lets GitHub Copilot + Claude implement complex Python features *iteratively*
 ## Features
 
 ✅ **Test-driven development** with atomic task breakdowns  
+✅ **Component-aware testing** (integration for APIs, unit for business logic)
 ✅ **Multi-level documentation** with collapsible sections  
 ✅ **NumPy-style docstrings** enforced throughout  
 ✅ **GitHub Flow** with automated PR creation/cleanup  

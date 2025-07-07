@@ -14,7 +14,7 @@ and stop without further analysis.
 1. **Completeness** — every acceptance criterion maps to at least one task.
 2. **Dependency Order** — tasks are sequenced so prerequisites are met.
 3. **Hidden Risks & Edge Cases** — concurrency, large data volumes, external APIs, state persistence.
-4. **Test Coverage Gaps** — missing negative or boundary tests, performance targets.
+4. **Test Coverage Gaps** — missing negative or boundary tests, performance targets, inappropriate testing strategy (should use integration testing for APIs, unit testing for business logic).
 5. **Maintainability** — cyclomatic complexity, modularity, naming consistency, docstring quality.
 6. **Security / Privacy** — injection, deserialization vulnerabilities, PII exposure, file-system risks.
 

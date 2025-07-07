@@ -101,27 +101,41 @@ Import the complete `.lad/` directory into any target project once on main.
 
 **Context Evolution:** As each sub-plan completes, context files for subsequent sub-plans are updated with new APIs, interfaces, and integration points, ensuring later phases have complete system visibility.
 
-### 3.4 Iterative Implementation Loop
+### 3.3c Testing Strategy Framework
 
-**Guardrails:** The **04_implement_next_task.md** prompt now includes:
-  - A **Scope Guard** to only touch code required by the current failing test.
-  - **Forbidden Actions** that prevent deletion of existing functions/classes unless they are 0% covered *and* absent from docs, with an explicit “Delete <name>? (y/n)” confirmation.
-  - A prompt for the user to run coverage **outside VS Code**, then verify 0 % coverage and doc absence before deletion.
+**LAD uses component-appropriate testing strategies** to ensure both comprehensive coverage and efficient development:
 
-For each unchecked box:
+**API Endpoints & Web Services:**
+- **Integration Testing**: Import and test the real FastAPI/Django/Flask app
+- **Mock External Dependencies**: Only databases, external APIs, file systems
+- **Test Framework Behavior**: HTTP routing, validation, serialization, error handling
+- **Why**: APIs are integration points - the framework behavior is part of what you're building
 
-1. Send `04_implement_next_task.md`.
-2. Agent writes failing test → passes it → updates docs.
-3. At the end of each main task, Copilot runs flake8 (complexity ≤ 10) and a quick coverage snapshot. You decide whether to fix issues before committing.
-4. **Radon audit:** At each main-task boundary, run `radon raw` and `radon mi`. If SLOC > 500 or MI < 65, Copilot suggests refactoring before proceeding.
-5. **Incremental refactoring**: For large modules (>500 LoC), Copilot extracts 200–300 LoC at a time into new sub-modules, commits, and then continues.
-6. Drafts Conventional‑Commit header + bullet body, then awaits approval to:6. Drafts Conventional‑Commit header + bullet body, then awaits approval to:
-   ```bash
-   git add -A
-   git commit -m "<header>" -m "<body bullets>"
-   git push -u origin HEAD
-   ```
-7. Repeat until checklist is complete.
+**Business Logic & Algorithms:**
+- **Unit Testing**: Mock all dependencies, test in complete isolation
+- **Focus**: Edge cases, error conditions, algorithmic correctness
+- **Benefits**: Fast execution, complete control, reliable testing
+- **Why**: Pure logic should be testable without external concerns
+
+**Data Processing & Utilities:**
+- **Unit Testing**: Minimal dependencies, test data fixtures
+- **Focus**: Input/output correctness, transformation accuracy
+- **Benefits**: Predictable test data, isolated behavior verification
+
+**Example - API Testing:**
+```python
+# ✅ Integration testing for API endpoints
+from myapp.app import create_app  # Real app
+from unittest.mock import patch
+
+def test_api_endpoint():
+    app = create_app()
+    with patch('myapp.database.get_user') as mock_db:  # Mock external deps
+        mock_db.return_value = {"id": 1, "name": "test"}
+        client = TestClient(app)  # Test real routing/validation
+        response = client.get("/api/users/1")
+        assert response.status_code == 200
+```
 
 ---
 
