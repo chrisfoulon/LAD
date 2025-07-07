@@ -7,14 +7,38 @@ You are Claude in Agent Mode.
 - Track completion and integration for each sub-plan. On sub-plan completion, verify integration points and update the next sub-plan's context.
 
 **Pre-flight Check:**  
-1. If there are any previously checked tasks in the current plan file (i.e. lines marked `- [x]`), re-run their tests:
+1. **Full regression test**: Run the complete test suite to establish baseline:
+   ```bash
+   pytest -q --tb=short
+   ```
+   If any tests fail, stop and fix regressions before proceeding.
+
+2. **Completed task verification**: If there are previously checked tasks in the current plan file (i.e. lines marked `- [x]`), re-run their specific tests:
    ```bash
    # run only tests for completed tasks
    pytest -q --maxfail=1 --lf
    ```
-2. If any of those tests now fail, diagnose and repair the break before proceeding.  
+
+3. **Coverage baseline**: Establish current coverage before changes:
+   ```bash
+   pytest --cov=. --cov-report=term-missing --tb=no -q | grep "TOTAL"
+   ```  
 
 **Scope Guard:** Before making any edits, identify the minimal code region needed to satisfy the current failing test. Do **not** modify or delete code outside this region.  
+
+**Regression Prevention:**
+1. **Dependency Analysis**: Before changing any function/class, run:
+   ```bash
+   # Find all references to understand impact
+   grep -r "function_name" . --include="*.py" | head -10
+   ```
+2. **Interface Preservation**: If changing public APIs, ensure backward compatibility or update all callers
+3. **Test Impact Assessment**: Before modifying shared utilities, run affected tests:
+   ```bash
+   # Run tests that import the module you're changing
+   pytest -q -k "test_module_name"
+   ```
+
 • If the file you're editing exceeds ~500 lines, pause and:
   1. Identify the next 200–300 line logical block.
   2. Extract it into a new sub-module via a separate prompt.
@@ -48,6 +72,13 @@ Implement the **next unchecked task** only from the current sub-plan.
 3. **Ensure NumPy-style docstrings** on all additions.  
 4. **Run** `pytest -q` **repeatedly until green.**
 
+4.5 **Continuous Regression Check**: After each code change, run a quick regression test:
+   ```bash
+   # Run tests for modules you've modified
+   pytest -q tests/test_modified_module.py
+   ```
+   If any existing tests fail, fix immediately before continuing.
+
 5. **Update docs & plan**:  
    • If `SPLIT=true` or SUB_PLAN_ID is set → update any `docs/{{DOC_BASENAME}}_*` or `docs/context_{{SUB_PLAN_ID}}.md` files you previously created.  
    • Else → update `docs/{{DOC_BASENAME}}.md`.  
@@ -58,7 +89,11 @@ Implement the **next unchecked task** only from the current sub-plan.
 
 5.5 **Quality Gate**  
    • Run flake8 and quick coverage as described in .copilot-instructions.md.  
-   • If violations or low coverage, pause and show first 10 issues, ask user whether to fix now.
+   • **Final regression test**: Run full test suite to ensure no regressions:
+     ```bash
+     pytest -q --tb=short
+     ```
+   • If violations or test failures, pause and show first 10 issues, ask user whether to fix now.
 
 6. **Draft commit**:
    * Header ↠ `feat({{FEATURE_SLUG}}): <concise phrase>`  ← **one sub-task only**  

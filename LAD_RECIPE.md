@@ -78,6 +78,7 @@ Import the complete `.lad/` directory into any target project once on main.
 | 3b| Integrate Copilot & ChatGPT reviews + evaluate plan splitting      | `03b_integrate_review.md`                              |
 | 3c| ChatGPT cross-validation                                           | `03_chatgpt_review.md`                                 |
 | 4 | Implement **next** task → commit & push (supports sub-plans)       | `04_implement_next_task.md`                            |
+| 4b| **Regression Recovery** (when tests break during implementation)   | `04b_regression_recovery.md`                           |
 | 5 | ChatGPT self-review (optional)                                     | `06_self_review_with_chatgpt.md`                       |
 | 6 | Compile review bundle → ChatGPT                                    | `05_code_review_package.md`                            |
 | 7 | **Open PR** via `gh pr create`                                     | (shell)                                                |
@@ -250,3 +251,37 @@ The agent may run commands (push, commit), but will:
 3. Share improvements back to your LAD repo.
 
 Enjoy faster, safer feature development with VS Code + Copilot + ChatGPT using the LAD framework!
+
+---
+
+### 3.3d Regression Prevention Strategy
+
+**The LAD framework prevents the common "fix-break-fix" cycle** through systematic regression testing:
+
+**Pre-flight Checks:**
+- **Full test suite baseline**: Ensures starting point is stable
+- **Coverage tracking**: Monitors test coverage before changes
+- **Dependency analysis**: Understands impact before modifications
+
+**During Development:**
+- **Minimal scope changes**: Only modify code required for failing test
+- **Continuous regression testing**: Run affected tests after each change
+- **Interface preservation**: Maintain backward compatibility for public APIs
+
+**Quality Gates:**
+- **Final regression test**: Full test suite before commit
+- **Impact assessment**: Verify no unintended side effects
+- **Coverage maintenance**: Ensure coverage doesn't decrease
+
+**Common Anti-Patterns Avoided:**
+- ❌ Making changes without running existing tests
+- ❌ Modifying shared utilities without impact analysis
+- ❌ Changing public APIs without updating callers
+- ❌ Committing without full test suite validation
+
+**Best Practices:**
+- ✅ Always run full test suite before starting (baseline)
+- ✅ Run affected tests after each change (continuous)
+- ✅ Use dependency analysis before modifying shared code
+- ✅ Maintain test coverage throughout development
+- ✅ Final full test suite before commit (validation)
