@@ -1,27 +1,38 @@
 # LLM‑Assisted‑Development (LAD) Framework
 
-> **Goal**  Provide a repeatable recipe**Guardrails:** The **04_implement_next_task.md** prompt now includes:
-  - A **Scope Guard** to only touch code required by the current failing test.
-  - **Forbidden Actions** that prevent deletion of existing functions/classes unless they are 0% covered *and* absent from docs, with an explicit "Delete <name>? (y/n)" confirmation.
-  - A prompt for the user to run coverage **outside VS Code**, then verify 0% coverage and Level-2 API docs before any removal. ready‑to‑paste prompt templates so you can ask **GitHub Copilot Claude Agent** (in VS Code) to:
+> **Goal**: Provide repeatable workflows for implementing complex Python features iteratively and safely.
 >
+> **Two Optimized Approaches:**
+> 
+> ## 🚀 Claude Code Workflow (Recommended for 2025)
+> **3-phase autonomous workflow with 75% less intervention**
+> 1. **Autonomous Context & Planning** — Dynamic codebase exploration + TDD planning
+> 2. **Iterative Implementation** — TDD loop with continuous quality monitoring  
+> 3. **Quality & Finalization** — Self-review + comprehensive validation
+>
+> ## 🛠️ GitHub Copilot Chat Workflow (VSCode)
+> **8-step guided workflow for traditional development**
 > 1. **Understand** a target slice of a large Python code‑base.
 > 2. **Plan** a feature via test‑driven, step‑wise decomposition.
 > 3. **Review** that plan (Claude & ChatGPT Plus).
 > 4. **Implement** each sub‑task in tiny, self‑documenting commits while keeping tests green **and updating docs**.
 > 5. **Merge & clean up** using a lightweight GitHub Flow.
 >
-> Works **today** with zero extra infra – no vector DB, only Copilot / ChatGPT Plus.
+> **Both approaches** deliver the same quality outcomes with different interaction models.
 
 ---
 
 ## 1 Repository Skeleton
 
 ```
-├── .copilot-instructions.md        # global style/context guidelines (see §6)
-├── README.md                       # quick‑start for humans
-├── LAD_RECIPE.md                   # this file – full workflow
-├── prompts/
+├── README.md                                   # dual-workflow documentation
+├── LAD_RECIPE.md                               # this file – complete guide
+├── CLAUDE.md                                   # Claude Code persistent context
+├── claude_prompts/                             # 🚀 Claude Code workflow
+│   ├── 01_autonomous_context_planning.md
+│   ├── 02_iterative_implementation.md
+│   └── 03_quality_finalization.md
+├── copilot_prompts/                            # 🛠️ Copilot Chat workflow  
 │   ├── 00_feature_kickoff.md
 │   ├── 01_context_gathering.md
 │   ├── 02_plan_feature.md
@@ -29,11 +40,12 @@
 │   ├── 03b_integrate_review.md
 │   ├── 03_chatgpt_review.md
 │   ├── 04_implement_next_task.md
+│   ├── 04b_regression_recovery.md
 │   ├── 05_code_review_package.md
 │   └── 06_self_review_with_chatgpt.md
-└── .vscode/
-    ├── settings.json               # pytest, coverage, flake8
-    └── extensions.json             # optional helpers
+└── .vscode/                                    # optional for Copilot workflow
+    ├── settings.json               
+    └── extensions.json
 ```
 
 Import the complete `.lad/` directory into any target project once on main.
@@ -44,7 +56,54 @@ Import the complete `.lad/` directory into any target project once on main.
 
 ---
 
-## 2 Quick‑Setup Checklist
+## 2 Claude Code Workflow (3-Phase Autonomous)
+
+### 2.1 Quick Setup
+1. **Install Claude Code**: Follow [Claude Code installation guide](https://docs.anthropic.com/en/docs/claude-code)
+2. **Import LAD framework**:
+   ```bash
+   git clone --depth 1 https://github.com/chrisfoulon/LAD tmp \
+     && rm -rf tmp/.git && mv tmp .lad \
+     && git add .lad && git commit -m "feat: add LAD framework"
+   ```
+3. **Create feature branch**: `git checkout -b feat/<slug>`
+
+### 2.2 Three-Phase Execution
+
+| Phase | Prompt | Duration | Capabilities |
+|-------|--------|----------|--------------|
+| **1. Context & Planning** | `claude_prompts/01_autonomous_context_planning.md` | ~10-15 min | Autonomous codebase exploration, TodoWrite task breakdown, sub-plan evaluation |
+| **2. Implementation** | `claude_prompts/02_iterative_implementation.md` | ~30-120 min | TDD loop, continuous testing, quality gates, progress tracking |
+| **3. Finalization** | `claude_prompts/03_quality_finalization.md` | ~5-10 min | Self-review, documentation, conventional commits |
+
+**Key Benefits**: 
+- 🎯 **75% less intervention** — 2 decision points vs 8 manual steps
+- ⚡ **3-5x faster development** — Autonomous execution with real-time feedback
+- 🔄 **Continuous quality** — Integrated testing and regression prevention  
+- 📊 **Progress visibility** — TodoWrite integration for status tracking
+
+### 2.3 Claude Code Workflow Features
+
+**Autonomous Context Gathering**: 
+- Uses Task/Glob/Grep tools for codebase exploration
+- No need to manually open files or navigate directories
+- Dynamic context based on feature requirements
+
+**Integrated Quality Assurance**:
+- Autonomous test execution with Bash tool
+- Real-time regression testing
+- Automated quality gates (flake8, coverage)
+
+**Smart Progress Management**:
+- TodoWrite for cross-session state persistence
+- Automatic sub-plan splitting for complex features
+- Context evolution for multi-phase implementations
+
+---
+
+## 3 Copilot Chat Workflow (8-Step Guided)
+
+### 3.1 Quick‑Setup Checklist
 
 1. Enable **Copilot Chat + Agent Mode** in VS Code.
 2. **Import LAD kit once on main** (one-time setup):
@@ -67,26 +126,26 @@ Import the complete `.lad/` directory into any target project once on main.
 
 ---
 
-## 3 End‑to‑End Workflow
+### 3.2 End‑to‑End Workflow
 
 | # | Action                                                             | Prompt                                                 |
 | - | ------------------------------------------------------------------ | ------------------------------------------------------ |
-| 0 | **Kick‑off** · import kit & gather clarifications                  | `00_feature_kickoff.md`                                |
-| 1 | Gather context → multi‑level docs                                  | `01_context_gathering.md`                              |
-| 2 | Draft test‑driven plan                                             | `02_plan_feature.md`                                   |
-| 3 | Claude plan review                                                 | `03_review_plan.md`                                    |
-| 3b| Integrate Copilot & ChatGPT reviews + evaluate plan splitting      | `03b_integrate_review.md`                              |
-| 3c| ChatGPT cross-validation                                           | `03_chatgpt_review.md`                                 |
-| 4 | Implement **next** task → commit & push (supports sub-plans)       | `04_implement_next_task.md`                            |
-| 4b| **Regression Recovery** (when tests break during implementation)   | `04b_regression_recovery.md`                           |
-| 5 | ChatGPT self-review (optional)                                     | `06_self_review_with_chatgpt.md`                       |
-| 6 | Compile review bundle → ChatGPT                                    | `05_code_review_package.md`                            |
+| 0 | **Kick‑off** · import kit & gather clarifications                  | `copilot_prompts/00_feature_kickoff.md`                                |
+| 1 | Gather context → multi‑level docs                                  | `copilot_prompts/01_context_gathering.md`                              |
+| 2 | Draft test‑driven plan                                             | `copilot_prompts/02_plan_feature.md`                                   |
+| 3 | Claude plan review                                                 | `copilot_prompts/03_review_plan.md`                                    |
+| 3b| Integrate Copilot & ChatGPT reviews + evaluate plan splitting      | `copilot_prompts/03b_integrate_review.md`                              |
+| 3c| ChatGPT cross-validation                                           | `copilot_prompts/03_chatgpt_review.md`                                 |
+| 4 | Implement **next** task → commit & push (supports sub-plans)       | `copilot_prompts/04_implement_next_task.md`                            |
+| 4b| **Regression Recovery** (when tests break during implementation)   | `copilot_prompts/04b_regression_recovery.md`                           |
+| 5 | ChatGPT self-review (optional)                                     | `copilot_prompts/06_self_review_with_chatgpt.md`                       |
+| 6 | Compile review bundle → ChatGPT                                    | `copilot_prompts/05_code_review_package.md`                            |
 | 7 | **Open PR** via `gh pr create`                                     | (shell)                                                |
 | 8 | **Squash‑merge & delete branch** via `gh pr merge --delete-branch` | (shell)                                                |
 
-### 3.3b Plan Splitting for Complex Features
+### 3.3 Plan Splitting for Complex Features
 
-**When plan complexity becomes unmanageable** (>6 tasks, >25-30 sub-tasks, mixed domains), the `03b_integrate_review.md` prompt automatically evaluates for plan splitting:
+**Both workflows support automatic plan splitting** when complexity becomes unmanageable (>6 tasks, >25-30 sub-tasks, mixed domains):
 
 **Splitting Benefits:**
 - **Foundation-First**: Core models and infrastructure implemented first

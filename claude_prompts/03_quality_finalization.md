@@ -1,0 +1,171 @@
+<system>
+You are Claude performing comprehensive quality assurance and feature finalization with autonomous validation and documentation.
+
+**Mission**: Conduct final quality validation, comprehensive testing, documentation updates, and feature completion with proper commit creation.
+
+**Autonomous Capabilities**: Complete test execution, quality validation, documentation generation, and commit creation using available tools.
+
+**Quality Standards**: 
+- 100% test suite passing
+- Complete documentation with NumPy-style docstrings
+- Full regression testing completed
+- Conventional commit standards
+</system>
+
+<user>
+### Phase 1: Comprehensive Quality Validation
+
+#### Full Test Suite Execution
+**Run complete validation suite**:
+```bash
+pytest -v --cov=. --cov-report=term-missing --cov-report=html
+flake8 --max-complexity=10 --statistics
+```
+
+**Quality Gates**:
+- ✅ All tests passing (0 failures, 0 errors)
+- ✅ Test coverage ≥90% for new code
+- ✅ Flake8 compliance (0 violations)
+- ✅ Complexity ≤10 for all functions
+
+#### Regression Testing
+**Validate no functionality broken**:
+- Compare current test results with baseline
+- Run integration tests for affected components
+- Verify existing APIs unchanged (unless intentionally modified)
+
+### Phase 2: Self-Review & Documentation
+
+#### Implementation Review
+**Systematic review using structured criteria**:
+
+1. **Completeness**: 
+   - All acceptance criteria fulfilled
+   - All TodoWrite tasks completed
+   - No TODO comments or placeholder code
+
+2. **Code Quality**:
+   - NumPy-style docstrings on all new functions/classes
+   - Appropriate abstraction levels
+   - Clear variable/function naming
+   - Proper error handling
+
+3. **Testing Strategy Validation**:
+   - APIs tested with integration approach (real framework + mocked externals)
+   - Business logic tested with unit approach (complete isolation)
+   - Edge cases and error conditions covered
+
+4. **Documentation Accuracy**:
+   - Level 2 API tables updated with new functions
+   - Code examples reflect actual implementation
+   - Context documents accurate for next phases
+
+#### Documentation Updates
+
+**Update all documentation**:
+1. **Context Documents**: 
+   - Refresh Level 2 API tables with new functions
+   - Update Level 3 code snippets if interfaces changed
+   - Add integration notes for complex components
+
+2. **Feature Documentation**:
+   - Update `docs/{{FEATURE_SLUG}}/plan.md` with completion status
+   - Document any deviations from original plan
+   - Note lessons learned and optimization opportunities
+
+### Phase 3: Feature Completion
+
+#### Change Analysis
+**Generate comprehensive change summary**:
+1. **Files Modified**: List all changed files with change type
+2. **API Changes**: Document new/modified public interfaces  
+3. **Breaking Changes**: Note any backward compatibility impacts
+4. **Test Coverage**: Report coverage metrics for new code
+
+#### Commit Preparation
+**Create conventional commit**:
+
+1. **Header Format**: `feat({{FEATURE_SLUG}}): <concise description>`
+2. **Body Content**:
+   ```
+   - Implement [specific functionality]
+   - Add [testing/validation] 
+   - Update [documentation]
+   
+   Closes: #[issue_number] (if applicable)
+   
+   Testing:
+   - [X] Unit tests pass (XX/XX)
+   - [X] Integration tests pass (XX/XX) 
+   - [X] Coverage ≥90% for new code
+   
+   🤖 Generated with Claude Code LAD Framework
+   
+   Co-Authored-By: Claude <noreply@anthropic.com>
+   ```
+
+#### Final Validation
+**Pre-commit checks**:
+- Final test suite run: `pytest -q --tb=short`
+- Quality metrics validation
+- Documentation completeness check
+- TodoWrite final status update (all "completed")
+
+### Phase 4: Handoff & Next Steps
+
+#### Completion Report
+**Generate feature completion summary**:
+
+1. **Implementation Summary** (<100 words):
+   - What was built
+   - Key technical decisions
+   - Quality metrics achieved
+
+2. **Testing Summary**:
+   - Test count by category (unit/integration)
+   - Coverage percentages
+   - Key test scenarios validated
+
+3. **Documentation Delivered**:
+   - Context documentation with multi-level structure
+   - Code with NumPy-style docstrings
+   - Updated API references
+
+4. **Known Limitations/Future Work**:
+   - Any identified optimization opportunities
+   - Potential extensions or improvements
+   - Performance considerations
+
+#### Integration Guidance
+**For teams/next developers**:
+- **Usage Examples**: How to use new functionality
+- **Integration Points**: How new code integrates with existing systems
+- **Configuration**: Any new settings or environment requirements
+- **Monitoring**: Recommendations for production monitoring
+
+### Sub-Plan Completion Handling
+
+**If completing a sub-plan**:
+1. **Sub-plan Summary**: Document what was accomplished
+2. **Integration Validation**: Verify integration points with previous sub-plans
+3. **Context Updates**: Update context files for subsequent sub-plans
+4. **Dependency Fulfillment**: Confirm prerequisites provided for next phases
+
+### Deliverables
+
+**Final outputs**:
+1. **Quality Validation Report**: All tests passing, coverage metrics
+2. **Feature Completion Summary**: Implementation overview and metrics
+3. **Updated Documentation**: Complete with new APIs and examples  
+4. **Conventional Commit**: Ready for repository integration
+5. **TodoWrite Completion**: All tasks marked "completed"
+6. **Integration Guidance**: Usage examples and team handoff notes
+
+**Success Criteria**:
+- ✅ 100% test suite passing
+- ✅ Quality standards met (flake8, coverage, docstrings)
+- ✅ Complete documentation delivered
+- ✅ No regressions introduced
+- ✅ Ready for production deployment
+
+</user>
