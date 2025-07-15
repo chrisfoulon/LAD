@@ -1,14 +1,14 @@
 # LLM‑Assisted‑Development (LAD) Framework
 
-> **Goal**: Provide repeatable workflows for implementing complex Python features iteratively and safely with intelligent model optimization.
+> **Goal**: Provide repeatable workflows for implementing complex Python features iteratively and safely.
 >
 > **Two Optimized Approaches:**
 > 
 > ## 🚀 Claude Code Workflow (Recommended for 2025)
-> **3-phase autonomous workflow with 75% less intervention + intelligent model optimization**
-> 1. **Autonomous Context & Planning** — Dynamic codebase exploration + TDD planning + model selection
-> 2. **Iterative Implementation** — TDD loop with model routing + continuous quality monitoring  
-> 3. **Quality & Finalization** — Self-review + comprehensive validation + cost optimization analysis
+> **3-phase autonomous workflow with 75% less intervention**
+> 1. **Autonomous Context & Planning** — Dynamic codebase exploration + TDD planning
+> 2. **Iterative Implementation** — TDD loop with continuous quality monitoring  
+> 3. **Quality & Finalization** — Self-review + comprehensive validation
 >
 > ## 🛠️ GitHub Copilot Chat Workflow (VSCode)
 > **8-step guided workflow for traditional development**
@@ -33,10 +33,8 @@
 │   ├── 01_autonomous_context_planning.md
 │   ├── 01b_plan_review_validation.md
 │   ├── 01c_chatgpt_review.md
-│   ├── 01d_integrate_reviews.md
 │   ├── 02_iterative_implementation.md
-│   ├── 03_quality_finalization.md
-│   └── model_selection_guide.md
+│   └── 03_quality_finalization.md
 ├── copilot_prompts/                            # 🛠️ Copilot Chat workflow  
 │   ├── 00_feature_kickoff.md
 │   ├── 01_context_gathering.md
@@ -78,11 +76,10 @@ Import the complete `.lad/` directory into any target project once on main.
 | Phase | Prompt | Duration | Capabilities |
 |-------|--------|----------|--------------|
 | **0. Feature Kickoff** | `claude_prompts/00_feature_kickoff.md` | ~5-10 min | Environment setup, quality standards, baseline metrics, configuration |
-| **1. Context & Planning** | `claude_prompts/01_autonomous_context_planning.md` | ~10-15 min | Autonomous codebase exploration, TodoWrite task breakdown, sub-plan evaluation, model selection |
+| **1. Context & Planning** | `claude_prompts/01_autonomous_context_planning.md` | ~10-15 min | Autonomous codebase exploration, TodoWrite task breakdown, sub-plan evaluation |
 | **1b. Plan Review (Optional)** | `claude_prompts/01b_plan_review_validation.md` | ~5-10 min | Cross-validation, independent review, quality assurance |
-| **1c. ChatGPT Review (Optional)** | `claude_prompts/01c_chatgpt_review.md` | ~5-10 min | External validation, structured review, risk identification |
-| **1d. Review Integration** | `claude_prompts/01d_integrate_reviews.md` | ~5-10 min | Multi-model feedback synthesis, conflict resolution, plan optimization |
-| **2. Implementation (Resumable)** | `claude_prompts/02_iterative_implementation.md` | ~30-120 min | TDD loop, model routing, continuous testing, cross-session resumability |
+| **1c. ChatGPT Review (Optional)** | `claude_prompts/01c_chatgpt_review.md` | ~5-10 min | External validation by ChatGPT, structured review, risk identification |
+| **2. Implementation (Resumable)** | `claude_prompts/02_iterative_implementation.md` | ~30-120 min | TDD loop, continuous testing, cross-session resumability |
 | **3. Finalization** | `claude_prompts/03_quality_finalization.md` | ~5-10 min | Self-review, documentation, conventional commits, cost optimization analysis |
 
 **Key Benefits**: 
@@ -90,9 +87,7 @@ Import the complete `.lad/` directory into any target project once on main.
 - ⚡ **3-5x faster development** — Autonomous execution with real-time feedback
 - 🔄 **Continuous quality** — Integrated testing and regression prevention  
 - 📊 **Progress visibility** — TodoWrite integration for status tracking
-- 💰 **30-50% cost reduction** — Intelligent model selection based on task complexity
-- 🚀 **Performance optimization** — Faster responses for simple tasks, premium capability for complex work
-- 🛡️ **Multi-model validation** — Independent review for complex/critical features
+- 🛡️ **Quality assurance** — Comprehensive validation and testing
 
 ### 2.3 Claude Code Workflow Features
 
@@ -135,7 +130,7 @@ Import the complete `.lad/` directory into any target project once on main.
 4. **User Interaction Points**:
    - After Phase 0: Review environment setup
    - After Phase 1: Review implementation plan
-   - After Phase 1b/1c/1d: Review validation and integration
+   - After Phase 1b/1c: Review validation
    - During Phase 2: Can stop/resume as needed
    - After Phase 3: Review final implementation
 
@@ -144,32 +139,6 @@ Import the complete `.lad/` directory into any target project once on main.
    - All feature work goes in `docs/` folder
    - TodoWrite tracks progress across sessions
    - Plans and context files provide cross-session continuity
-
-### 2.5 Model Optimization System
-
-**Intelligent Model Selection**:
-- **Task complexity assessment** — Automatic evaluation of feature complexity
-- **Model routing** — Appropriate model selection based on task requirements
-- **Cost optimization** — 30-50% cost reduction through efficient model usage
-- **Quality maintenance** — Consistent quality standards across all models
-
-**Model Capabilities**:
-- **Haiku 3.5** — Simple tasks (documentation, typos, basic operations) → 15x cost reduction
-- **Sonnet 4** — Medium tasks (features, testing, refactoring) → 5x cost reduction
-- **Opus 4** — Complex tasks (architecture, security, performance) → Premium performance
-- **Sonnet 3.7/4** — Extended tasks (multi-step analysis, debugging) → Extended thinking mode
-
-**Multi-Model Validation**:
-- **Cross-validation** for complex or critical features
-- **Independent review** by different models to catch blind spots
-- **Quality assurance** through diverse model perspectives
-- **Risk mitigation** for high-stakes implementations
-
-**Performance Tracking**:
-- **Model effectiveness** monitoring per task type
-- **Cost efficiency** analysis and optimization
-- **Quality outcomes** validation across model selections
-- **Continuous improvement** of selection criteria
 
 ---
 
@@ -206,7 +175,7 @@ Import the complete `.lad/` directory into any target project once on main.
 | 1 | Gather context → multi‑level docs                                  | `copilot_prompts/01_context_gathering.md`                              |
 | 2 | Draft test‑driven plan                                             | `copilot_prompts/02_plan_feature.md`                                   |
 | 3 | Claude plan review                                                 | `copilot_prompts/03_review_plan.md`                                    |
-| 3b| Integrate Copilot & ChatGPT reviews + evaluate plan splitting      | `copilot_prompts/03b_integrate_review.md`                              |
+| 3b| Integrate reviews + evaluate plan splitting                        | `copilot_prompts/03b_integrate_review.md`                              |
 | 3c| ChatGPT cross-validation                                           | `copilot_prompts/03_chatgpt_review.md`                                 |
 | 4 | Implement **next** task → commit & push (supports sub-plans)       | `copilot_prompts/04_implement_next_task.md`                            |
 | 4b| **Regression Recovery** (when tests break during implementation)   | `copilot_prompts/04b_regression_recovery.md`                           |
