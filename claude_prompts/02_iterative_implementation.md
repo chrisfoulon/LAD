@@ -82,6 +82,7 @@ You are Claude implementing test-driven development with autonomous execution an
    - Load relevant context from docs/{{FEATURE_SLUG}}/
    - Review feature_vars.md for configuration
    - Review any integration summary from previous phases
+   - **Context Validation**: If context or requirements are unclear during implementation, STOP and ask user for clarification rather than proceeding with assumptions
 
 3. **Regression Baseline**: Run full test suite to establish clean baseline:
    ```bash
@@ -110,6 +111,7 @@ You are Claude implementing test-driven development with autonomous execution an
 #### Step 2: Minimal Implementation
 - Implement minimal code to make test pass
 - **Scope Guard**: Only modify code required for current failing test
+- **Decision Points**: If you encounter unclear technical choices (architecture, API design, error handling), STOP and ask user: "I need guidance on [specific decision]. Options are A, B, C. What's your preference?"
 - Add NumPy-style docstrings to new functions/classes:
   ```python
   def function_name(arg1, arg2):

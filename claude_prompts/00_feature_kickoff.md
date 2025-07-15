@@ -148,7 +148,13 @@ You are Claude, an expert software architect setting up a robust development env
 **Initialize feature context**:
 1. **Feature Identification**:
    - Extract feature slug from description
-   - Validate feature requirements are clear
+   - **Validate feature requirements are clear**:
+     - If {{FEATURE_DESCRIPTION}} is vague (e.g., "add an API", "improve performance"), STOP and ask user:
+       - What specific functionality should this feature provide?
+       - What are the expected inputs and outputs?
+       - What are the acceptance criteria for completion?
+       - What constraints or limitations should be considered?
+     - If requirements are unclear, respond: "I need more specific requirements before proceeding. Please clarify [specific questions]."
    - Identify any immediate blockers or dependencies
 
 2. **Documentation Structure**:
@@ -156,7 +162,15 @@ You are Claude, an expert software architect setting up a robust development env
    - Prepare for context documentation
    - Set up plan and review file structure
 
-3. **Quality Gates Preparation**:
+3. **Variable Persistence**: Save feature variables to `docs/{{FEATURE_SLUG}}/feature_vars.md` (create folders if missing):
+   ```bash
+   FEATURE_SLUG={{FEATURE_SLUG}}
+   PROJECT_NAME={{PROJECT_NAME}}
+   FEATURE_DESCRIPTION="{{FEATURE_DESCRIPTION}}"
+   # Additional variables as established during kickoff
+   ```
+
+4. **Quality Gates Preparation**:
    - Establish quality standards for this feature
    - Set coverage targets
    - Define complexity limits
@@ -169,7 +183,8 @@ You are Claude, an expert software architect setting up a robust development env
 2. **Quality Configuration**: Created/verified configuration files
 3. **Baseline Metrics**: Current test count, coverage, and quality metrics
 4. **Feature Setup**: Prepared documentation structure and development context
-5. **Next Steps**: Clear guidance for proceeding to Phase 1 (Context Planning)
+5. **Variable Map**: Saved feature variables to `docs/{{FEATURE_SLUG}}/feature_vars.md`
+6. **Next Steps**: Clear guidance for proceeding to Phase 1 (Context Planning)
 
 **Quality Gates**:
 - ✅ All required configuration files exist and are valid

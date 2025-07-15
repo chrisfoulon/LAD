@@ -32,6 +32,11 @@ You are Claude, an expert software architect implementing test-driven developmen
 - Constraints: {{CONSTRAINTS}}
 - Acceptance Criteria: {{ACCEPTANCE_CRITERIA}}
 
+**IMPORTANT**: If any of the above requirements are missing, incomplete, or unclear, STOP and ask the user to clarify before proceeding:
+- "I need clarification on [specific requirement] before I can create a proper implementation plan."
+- "The feature description is too vague. Please specify [what you need clarified]."
+- "I cannot proceed without clear acceptance criteria. Please define what constitutes successful completion."
+
 ### Phase 1: Autonomous Codebase Exploration
 
 **Instructions**: Use your autonomous tools to understand the codebase architecture without requiring user file navigation.
@@ -99,6 +104,7 @@ You are Claude, an expert software architect implementing test-driven developmen
    - All dependencies properly sequenced
    - Testing strategy appropriate for component types
    - Implementation approach is feasible
+   - **Requirement Completeness**: If during planning you realize requirements are unclear or missing, STOP and ask user for clarification rather than making assumptions
 
 2. **Risk Assessment**:
    - Identify potential concurrency, security, performance issues
@@ -112,12 +118,12 @@ You are Claude, an expert software architect implementing test-driven developmen
    - Are dependencies properly identified?
    - Is the technical approach sound?
 
-4. **Variable Persistence**: Save to `docs/{{FEATURE_SLUG}}/feature_vars.md`:
+4. **Variable Update**: Update `docs/{{FEATURE_SLUG}}/feature_vars.md` with planning-specific variables:
    ```bash
-   FEATURE_SLUG={{FEATURE_SLUG}}
-   PROJECT_NAME={{PROJECT_NAME}}
+   # Add to existing feature_vars.md:
    TASK_COMPLEXITY={{TASK_COMPLEXITY}}
-   # Additional variables as needed
+   IMPLEMENTATION_APPROACH={{IMPLEMENTATION_APPROACH}}
+   # Additional planning variables as determined
    ```
 
 ### Deliverables
@@ -126,7 +132,7 @@ You are Claude, an expert software architect implementing test-driven developmen
 1. **Context Documentation**: Multi-level codebase understanding
 2. **TodoWrite Task List**: Prioritized implementation tasks
 3. **Implementation Plan**: Detailed TDD plan with testing strategy
-4. **Variable Map**: Persistent feature configuration
+4. **Updated Variable Map**: Enhanced feature configuration with planning variables
 5. **Sub-plan Structure**: If complexity warrants splitting
 6. **Complexity Assessment**: Realistic evaluation of implementation challenges
 
