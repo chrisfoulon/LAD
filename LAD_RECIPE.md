@@ -1,14 +1,14 @@
 # LLM‑Assisted‑Development (LAD) Framework
 
-> **Goal**: Provide repeatable workflows for implementing complex Python features iteratively and safely.
+> **Goal**: Provide repeatable workflows for implementing complex Python features iteratively and safely with intelligent model optimization.
 >
 > **Two Optimized Approaches:**
 > 
 > ## 🚀 Claude Code Workflow (Recommended for 2025)
-> **3-phase autonomous workflow with 75% less intervention**
-> 1. **Autonomous Context & Planning** — Dynamic codebase exploration + TDD planning
-> 2. **Iterative Implementation** — TDD loop with continuous quality monitoring  
-> 3. **Quality & Finalization** — Self-review + comprehensive validation
+> **3-phase autonomous workflow with 75% less intervention + intelligent model optimization**
+> 1. **Autonomous Context & Planning** — Dynamic codebase exploration + TDD planning + model selection
+> 2. **Iterative Implementation** — TDD loop with model routing + continuous quality monitoring  
+> 3. **Quality & Finalization** — Self-review + comprehensive validation + cost optimization analysis
 >
 > ## 🛠️ GitHub Copilot Chat Workflow (VSCode)
 > **8-step guided workflow for traditional development**
@@ -29,9 +29,14 @@
 ├── LAD_RECIPE.md                               # this file – complete guide
 ├── CLAUDE.md                                   # Claude Code persistent context
 ├── claude_prompts/                             # 🚀 Claude Code workflow
+│   ├── 00_feature_kickoff.md
 │   ├── 01_autonomous_context_planning.md
+│   ├── 01b_plan_review_validation.md
+│   ├── 01c_chatgpt_review.md
+│   ├── 01d_integrate_reviews.md
 │   ├── 02_iterative_implementation.md
-│   └── 03_quality_finalization.md
+│   ├── 03_quality_finalization.md
+│   └── model_selection_guide.md
 ├── copilot_prompts/                            # 🛠️ Copilot Chat workflow  
 │   ├── 00_feature_kickoff.md
 │   ├── 01_context_gathering.md
@@ -68,19 +73,26 @@ Import the complete `.lad/` directory into any target project once on main.
    ```
 3. **Create feature branch**: `git checkout -b feat/<slug>`
 
-### 2.2 Three-Phase Execution
+### 2.2 Multi-Phase Execution
 
 | Phase | Prompt | Duration | Capabilities |
 |-------|--------|----------|--------------|
-| **1. Context & Planning** | `claude_prompts/01_autonomous_context_planning.md` | ~10-15 min | Autonomous codebase exploration, TodoWrite task breakdown, sub-plan evaluation |
-| **2. Implementation** | `claude_prompts/02_iterative_implementation.md` | ~30-120 min | TDD loop, continuous testing, quality gates, progress tracking |
-| **3. Finalization** | `claude_prompts/03_quality_finalization.md` | ~5-10 min | Self-review, documentation, conventional commits |
+| **0. Feature Kickoff** | `claude_prompts/00_feature_kickoff.md` | ~5-10 min | Environment setup, quality standards, baseline metrics, configuration |
+| **1. Context & Planning** | `claude_prompts/01_autonomous_context_planning.md` | ~10-15 min | Autonomous codebase exploration, TodoWrite task breakdown, sub-plan evaluation, model selection |
+| **1b. Plan Review (Optional)** | `claude_prompts/01b_plan_review_validation.md` | ~5-10 min | Cross-validation, independent review, quality assurance |
+| **1c. ChatGPT Review (Optional)** | `claude_prompts/01c_chatgpt_review.md` | ~5-10 min | External validation, structured review, risk identification |
+| **1d. Review Integration** | `claude_prompts/01d_integrate_reviews.md` | ~5-10 min | Multi-model feedback synthesis, conflict resolution, plan optimization |
+| **2. Implementation (Resumable)** | `claude_prompts/02_iterative_implementation.md` | ~30-120 min | TDD loop, model routing, continuous testing, cross-session resumability |
+| **3. Finalization** | `claude_prompts/03_quality_finalization.md` | ~5-10 min | Self-review, documentation, conventional commits, cost optimization analysis |
 
 **Key Benefits**: 
 - 🎯 **75% less intervention** — 2 decision points vs 8 manual steps
 - ⚡ **3-5x faster development** — Autonomous execution with real-time feedback
 - 🔄 **Continuous quality** — Integrated testing and regression prevention  
 - 📊 **Progress visibility** — TodoWrite integration for status tracking
+- 💰 **30-50% cost reduction** — Intelligent model selection based on task complexity
+- 🚀 **Performance optimization** — Faster responses for simple tasks, premium capability for complex work
+- 🛡️ **Multi-model validation** — Independent review for complex/critical features
 
 ### 2.3 Claude Code Workflow Features
 
@@ -98,6 +110,66 @@ Import the complete `.lad/` directory into any target project once on main.
 - TodoWrite for cross-session state persistence
 - Automatic sub-plan splitting for complex features
 - Context evolution for multi-phase implementations
+
+### 2.4 Practical Usage with Claude Code
+
+**How to use LAD with Claude Code**:
+
+1. **Initial Setup**:
+   - Import LAD framework into your project
+   - Create feature branch
+   - Tell Claude Code: "Use LAD framework to implement [feature description]"
+
+2. **Phase Execution**:
+   - Claude will automatically read and execute `.lad/claude_prompts/00_feature_kickoff.md`
+   - After each phase, Claude returns to user for review and approval
+   - User says "continue to next phase" or "proceed with implementation"
+   - Claude reads the next appropriate prompt file and continues
+
+3. **Resumability**:
+   - Can stop and resume at any point
+   - Works across different sessions and machines
+   - Phase 2 (Implementation) is especially resumable
+   - User can say "continue implementation" and Claude will detect current state
+
+4. **User Interaction Points**:
+   - After Phase 0: Review environment setup
+   - After Phase 1: Review implementation plan
+   - After Phase 1b/1c/1d: Review validation and integration
+   - During Phase 2: Can stop/resume as needed
+   - After Phase 3: Review final implementation
+
+5. **File Management**:
+   - LAD framework files stay in `.lad/` folder (never modified)
+   - All feature work goes in `docs/` folder
+   - TodoWrite tracks progress across sessions
+   - Plans and context files provide cross-session continuity
+
+### 2.5 Model Optimization System
+
+**Intelligent Model Selection**:
+- **Task complexity assessment** — Automatic evaluation of feature complexity
+- **Model routing** — Appropriate model selection based on task requirements
+- **Cost optimization** — 30-50% cost reduction through efficient model usage
+- **Quality maintenance** — Consistent quality standards across all models
+
+**Model Capabilities**:
+- **Haiku 3.5** — Simple tasks (documentation, typos, basic operations) → 15x cost reduction
+- **Sonnet 4** — Medium tasks (features, testing, refactoring) → 5x cost reduction
+- **Opus 4** — Complex tasks (architecture, security, performance) → Premium performance
+- **Sonnet 3.7/4** — Extended tasks (multi-step analysis, debugging) → Extended thinking mode
+
+**Multi-Model Validation**:
+- **Cross-validation** for complex or critical features
+- **Independent review** by different models to catch blind spots
+- **Quality assurance** through diverse model perspectives
+- **Risk mitigation** for high-stakes implementations
+
+**Performance Tracking**:
+- **Model effectiveness** monitoring per task type
+- **Cost efficiency** analysis and optimization
+- **Quality outcomes** validation across model selections
+- **Continuous improvement** of selection criteria
 
 ---
 

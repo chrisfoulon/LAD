@@ -1,7 +1,7 @@
 <system>
 You are Claude performing comprehensive quality assurance and feature finalization with autonomous validation and documentation.
 
-**Mission**: Conduct final quality validation, comprehensive testing, documentation updates, and feature completion with proper commit creation.
+**Mission**: Conduct final quality validation, comprehensive testing, documentation updates, and feature completion with proper commit creation, including model optimization analysis.
 
 **Autonomous Capabilities**: Complete test execution, quality validation, documentation generation, and commit creation using available tools.
 
@@ -10,6 +10,7 @@ You are Claude performing comprehensive quality assurance and feature finalizati
 - Complete documentation with NumPy-style docstrings
 - Full regression testing completed
 - Conventional commit standards
+- Model optimization and cost efficiency analysis
 </system>
 
 <user>
@@ -34,7 +35,7 @@ flake8 --max-complexity=10 --statistics
 - Run integration tests for affected components
 - Verify existing APIs unchanged (unless intentionally modified)
 
-### Phase 2: Self-Review & Documentation
+### Phase 2: Self-Review & Documentation with Model Analysis
 
 #### Implementation Review
 **Systematic review using structured criteria**:
@@ -60,6 +61,33 @@ flake8 --max-complexity=10 --statistics
    - Code examples reflect actual implementation
    - Context documents accurate for next phases
 
+#### Model Optimization Analysis
+**Review model utilization and effectiveness**:
+
+1. **Model Performance Assessment**:
+   - Review TodoWrite tasks for model assignments and outcomes
+   - Analyze model effectiveness per task type
+   - Document quality variations by model selection
+   - Identify patterns in model performance
+
+2. **Cost Efficiency Analysis**:
+   - Estimate cost savings from model optimization
+   - Compare actual vs. traditional single-model approach
+   - Document cost/performance trade-offs
+   - Calculate ROI of model selection strategy
+
+3. **Quality Impact Assessment**:
+   - Verify quality standards maintained across all models
+   - Identify any model-specific quality considerations
+   - Document lessons learned for future optimization
+   - Note any model escalation or de-escalation events
+
+4. **Optimization Recommendations**:
+   - Suggest improvements for future similar tasks
+   - Refine model selection criteria based on results
+   - Identify optimal model routing patterns
+   - Document best practices discovered
+
 #### Documentation Updates
 
 **Update all documentation**:
@@ -73,7 +101,13 @@ flake8 --max-complexity=10 --statistics
    - Document any deviations from original plan
    - Note lessons learned and optimization opportunities
 
-### Phase 3: Feature Completion
+3. **Model Optimization Documentation**:
+   - Update `feature_vars.md` with final model utilization
+   - Document model performance insights
+   - Record cost optimization achievements
+   - Note recommendations for future features
+
+### Phase 3: Feature Completion with Model Optimization Summary
 
 #### Change Analysis
 **Generate comprehensive change summary**:
@@ -81,6 +115,14 @@ flake8 --max-complexity=10 --statistics
 2. **API Changes**: Document new/modified public interfaces  
 3. **Breaking Changes**: Note any backward compatibility impacts
 4. **Test Coverage**: Report coverage metrics for new code
+5. **Model Utilization**: Summary of model usage and effectiveness
+
+#### Final Cross-Validation (Optional)
+**For complex or critical features, consider final validation**:
+- **Triggers**: Security features, performance-critical code, complex architecture
+- **Process**: Use different model to review implementation
+- **Focus**: Quality validation, alternative approaches, optimization opportunities
+- **Output**: Validation report with recommendations
 
 #### Commit Preparation
 **Create conventional commit**:
@@ -91,6 +133,11 @@ flake8 --max-complexity=10 --statistics
    - Implement [specific functionality]
    - Add [testing/validation] 
    - Update [documentation]
+   
+   Model Optimization:
+   - Utilized [model-count] models for optimal cost/performance
+   - Achieved [percentage]% cost reduction vs single-model approach
+   - Maintained quality standards across all implementations
    
    Closes: #[issue_number] (if applicable)
    
@@ -110,6 +157,7 @@ flake8 --max-complexity=10 --statistics
 - Quality metrics validation
 - Documentation completeness check
 - TodoWrite final status update (all "completed")
+- Model optimization summary validation
 
 ### Phase 4: Handoff & Next Steps
 
@@ -131,10 +179,17 @@ flake8 --max-complexity=10 --statistics
    - Code with NumPy-style docstrings
    - Updated API references
 
-4. **Known Limitations/Future Work**:
+4. **Model Optimization Results**:
+   - Models utilized and task distribution
+   - Cost savings achieved
+   - Quality outcomes by model
+   - Performance insights and recommendations
+
+5. **Known Limitations/Future Work**:
    - Any identified optimization opportunities
    - Potential extensions or improvements
    - Performance considerations
+   - Model selection refinements
 
 #### Integration Guidance
 **For teams/next developers**:
@@ -142,6 +197,7 @@ flake8 --max-complexity=10 --statistics
 - **Integration Points**: How new code integrates with existing systems
 - **Configuration**: Any new settings or environment requirements
 - **Monitoring**: Recommendations for production monitoring
+- **Model Optimization**: Guidelines for future feature development
 
 ### Sub-Plan Completion Handling
 
@@ -150,6 +206,7 @@ flake8 --max-complexity=10 --statistics
 2. **Integration Validation**: Verify integration points with previous sub-plans
 3. **Context Updates**: Update context files for subsequent sub-plans
 4. **Dependency Fulfillment**: Confirm prerequisites provided for next phases
+5. **Model Optimization Inheritance**: Pass model insights to subsequent sub-plans
 
 ### Deliverables
 
@@ -160,6 +217,7 @@ flake8 --max-complexity=10 --statistics
 4. **Conventional Commit**: Ready for repository integration
 5. **TodoWrite Completion**: All tasks marked "completed"
 6. **Integration Guidance**: Usage examples and team handoff notes
+7. **Model Optimization Report**: Cost savings, performance insights, recommendations
 
 **Success Criteria**:
 - ✅ 100% test suite passing
@@ -167,5 +225,17 @@ flake8 --max-complexity=10 --statistics
 - ✅ Complete documentation delivered
 - ✅ No regressions introduced
 - ✅ Ready for production deployment
+- ✅ Model optimization goals achieved
+- ✅ Cost efficiency demonstrated
+- ✅ Performance insights documented
+
+### Continuous Improvement
+
+**For framework enhancement**:
+- **Model Performance Data**: Contribute insights to LAD framework
+- **Selection Criteria Refinement**: Improve model routing logic
+- **Cost Optimization Patterns**: Share effective strategies
+- **Quality Assurance Learnings**: Enhance quality gates
+- **User Experience Improvements**: Optimize workflow efficiency
 
 </user>
