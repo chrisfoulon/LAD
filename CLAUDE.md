@@ -28,6 +28,20 @@
 ## Common Gotchas & Solutions
 *Accumulated from previous implementations*
 
+### Token Optimization for Large Codebases
+**Standard test commands:**
+- **Large test suites**: Use `2>&1 | tail -n 100` for pytest commands to capture only final results/failures
+- **Coverage reports**: Use `tail -n 150` for comprehensive coverage output to include summary
+- **Keep targeted tests unchanged**: Single test runs (`pytest -xvs`) don't need redirection
+
+**Long-running commands (>2 minutes):**
+- **Pattern**: `<command> 2>&1 | tee full_output.txt | grep -iE "(warning|error|failed|exception|fatal|critical)" | tail -n 30; echo "--- FINAL OUTPUT ---"; tail -n 100 full_output.txt`
+- **Use cases**: Package installs, builds, data processing, comprehensive test suites, long compilation
+- **Benefits**: Captures warnings/errors from anywhere in output, saves full output for detailed review, prevents token explosion
+- **Case-insensitive**: Catches `ERROR`, `Error`, `error`, `WARNING`, `Warning`, `warning`, etc.
+
+**Rationale**: Large codebases can generate massive output consuming significant Claude Pro allowance. Enhanced pattern ensures critical information isn't missed while optimizing token usage.
+
 ## Integration Patterns
 *How components typically connect in this codebase*
 

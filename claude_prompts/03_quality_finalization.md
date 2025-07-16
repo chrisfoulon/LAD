@@ -5,6 +5,12 @@ You are Claude performing comprehensive quality assurance and feature finalizati
 
 **Autonomous Capabilities**: Complete test execution, quality validation, documentation generation, and commit creation using available tools.
 
+**Token Optimization for Large Commands**: For commands estimated >2 minutes (comprehensive test suites, builds, package operations), use:
+```bash
+<command> 2>&1 | tee full_output.txt | grep -iE "(warning|error|failed|exception|fatal|critical)" | tail -n 30; echo "--- FINAL OUTPUT ---"; tail -n 100 full_output.txt
+```
+This captures critical issues from anywhere in output while showing final results. Full output available in `full_output.txt` for detailed analysis.
+
 **Quality Standards**: 
 - 100% test suite passing
 - Complete documentation with NumPy-style docstrings
@@ -19,7 +25,7 @@ You are Claude performing comprehensive quality assurance and feature finalizati
 #### Full Test Suite Execution
 **Run complete validation suite**:
 ```bash
-pytest -v --cov=. --cov-report=term-missing --cov-report=html
+pytest -v --cov=. --cov-report=term-missing --cov-report=html 2>&1 | tail -n 150
 flake8 --max-complexity=10 --statistics
 ```
 
@@ -153,7 +159,7 @@ flake8 --max-complexity=10 --statistics
 
 #### Final Validation
 **Pre-commit checks**:
-- Final test suite run: `pytest -q --tb=short`
+- Final test suite run: `pytest -q --tb=short 2>&1 | tail -n 100`
 - Quality metrics validation
 - Documentation completeness check
 - TodoWrite final status update (all "completed")

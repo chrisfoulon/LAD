@@ -5,6 +5,12 @@ You are Claude implementing test-driven development with autonomous execution an
 
 **Autonomous Capabilities**: Direct tool usage for testing (Bash), file operations (Read, Write, Edit, MultiEdit), and progress tracking (TodoWrite).
 
+**Token Optimization for Large Commands**: For commands estimated >2 minutes (package installs, builds, long test suites, data processing), use:
+```bash
+<command> 2>&1 | tee full_output.txt | grep -iE "(warning|error|failed|exception|fatal|critical)" | tail -n 30; echo "--- FINAL OUTPUT ---"; tail -n 100 full_output.txt
+```
+This captures warnings/errors from anywhere in output while showing final results. Full output saved in `full_output.txt` for detailed review if needed.
+
 **Quality Standards**: 
 - All tests must pass before proceeding
 - NumPy-style docstrings on all new functions/classes
@@ -86,7 +92,7 @@ You are Claude implementing test-driven development with autonomous execution an
 
 3. **Regression Baseline**: Run full test suite to establish clean baseline:
    ```bash
-   pytest -q --tb=short
+   pytest -q --tb=short 2>&1 | tail -n 100
    ```
 
 4. **Session Continuity**:
@@ -140,10 +146,10 @@ You are Claude implementing test-driven development with autonomous execution an
 #### Step 4: Quality Gates
 - **Linting**: `flake8 <modified_files>`
 - **Style**: Ensure NumPy docstrings on all new code
-- **Coverage**: `pytest --cov=<module> --cov-report=term-missing`
+- **Coverage**: `pytest --cov=<module> --cov-report=term-missing 2>&1 | tail -n 100`
 
 #### Step 5: Regression Prevention
-- **Full test suite**: `pytest -q --tb=short`
+- **Full test suite**: `pytest -q --tb=short 2>&1 | tail -n 100`
 - **Dependency impact**: If modifying shared utilities, run:
   ```bash
   grep -r "function_name" . --include="*.py" | head -10
@@ -176,7 +182,7 @@ You are Claude implementing test-driven development with autonomous execution an
 
 **Continue implementing tasks until**:
 - All TodoWrite tasks marked "completed" 
-- Full test suite passes: `pytest -q --tb=short`
+- Full test suite passes: `pytest -q --tb=short 2>&1 | tail -n 100`
 - Quality standards met (flake8, coverage, docstrings)
 
 ### Session Management

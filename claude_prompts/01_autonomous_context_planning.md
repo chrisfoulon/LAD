@@ -76,7 +76,15 @@ You are Claude, an expert software architect implementing test-driven developmen
    **Resource Requirements**: [time-estimates-dependencies]
    ```
 
-2. **Task Breakdown**: Use TodoWrite to create prioritized task list:
+2. **Task Breakdown**: 
+   
+   **Documentation Impact Assessment** (include relevant tasks):
+   - [ ] Setup/installation changes → Add setup documentation task
+   - [ ] User-facing features → Add README/user guide task  
+   - [ ] Breaking changes → Add migration guide task
+   - [ ] New APIs → Add API documentation task
+   
+   Use TodoWrite to create prioritized task list:
    ```python
    TodoWrite([
        {"id": "1", "content": "Task description with test file", "status": "pending", "priority": "high"},
