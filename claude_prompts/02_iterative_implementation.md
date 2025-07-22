@@ -117,7 +117,33 @@ This captures warnings/errors from anywhere in output while showing final result
 #### Step 2: Minimal Implementation
 - Implement minimal code to make test pass
 - **Scope Guard**: Only modify code required for current failing test
-- **Decision Points**: If you encounter unclear technical choices (architecture, API design, error handling), STOP and ask user: "I need guidance on [specific decision]. Options are A, B, C. What's your preference?"
+- **Technical Decision Points**: If you encounter significant technical choices, STOP and ask user guidance:
+
+  ```markdown
+  **USER GUIDANCE NEEDED**
+  
+  **Decision Required:** [Specific technical decision needed]
+  
+  **Context:** [Brief explanation of the situation]
+  
+  **Options:**
+  A) [Option A]: [Description with pros/cons]
+  B) [Option B]: [Description with pros/cons]  
+  C) [Option C]: [Description with pros/cons]
+  
+  **Recommendation:** [Your technical recommendation with reasoning]
+  
+  **Impact:** [What this affects in the codebase]
+  
+  **Question:** Which approach should I implement?
+  ```
+
+  **Decision Triggers:**
+  - Database schema or API design choices
+  - Error handling strategy selection
+  - Performance vs. simplicity trade-offs
+  - Breaking change considerations
+  - Architecture pattern selection
 - Add NumPy-style docstrings to new functions/classes:
   ```python
   def function_name(arg1, arg2):
@@ -156,15 +182,36 @@ This captures warnings/errors from anywhere in output while showing final result
   pytest -q -k "test_<impacted_module>"
   ```
 
-### Continuous Progress Tracking
+### Enhanced Progress Tracking & Milestone System
 
 **After each successful implementation**:
 
-1. **Update TodoWrite**: Mark current task as "completed"
-2. **Update Documentation**: 
+1. **Dual Task Tracking**:
+   - **Update TodoWrite**: Mark current task as "completed"
+   - **Update Plan File**: Change `- [ ] Task` to `- [x] Task` in `docs/{{FEATURE_SLUG}}/plan.md`
+   - **Update Sub-tasks**: Check off completed sub-task items
+
+2. **Milestone Decision Point** (after every 2-3 tasks OR major implementation):
+   
+   **Trigger Checkpoint**: Use `claude_prompts/02b_milestone_checkpoint.md` protocol:
+   - Generate comprehensive progress summary
+   - Run quality validation (tests, lint, coverage)
+   - Show `git diff --stat` of changes
+   - Present user with clear approval options (A/B/C/D)
+   - Wait for user decision before proceeding
+   
+   **Checkpoint ensures**:
+   - User visibility into progress
+   - Quality gates validation  
+   - Structured commit workflow
+   - Opportunity for course correction
+
+3. **Commit Workflow Integration**: Handled by checkpoint system (Phase 2b)
+
+4. **Documentation Updates**:
    - Add new APIs to Level 2 table in context docs
    - Update any changed interfaces or contracts
-3. **Quality Metrics**: Track coverage, complexity, test count
+   - Track quality metrics: coverage, complexity, test count
 
 ### Error Recovery Protocol
 

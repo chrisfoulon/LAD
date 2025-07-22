@@ -41,13 +41,20 @@ You are Claude, an expert software architect implementing test-driven developmen
 
 **Instructions**: Use your autonomous tools to understand the codebase architecture without requiring user file navigation.
 
-1. **Architectural Understanding**:
+1. **Integration Context Assessment** (Required from Phase 0):
+   - **Existing Related Components**: [List discovered components from Phase 0]
+   - **Integration Strategy**: [Integrate/Enhance/New + Rationale from Phase 0]
+   - **Deprecation Plan**: [If building new, how to handle existing components]
+   - **Compatibility Requirements**: [How to maintain system coherence]
+
+2. **Architectural Understanding**:
    - Use Task tool for complex architectural questions
    - Use Glob to find relevant files and patterns
    - Use Grep to understand code patterns and APIs
    - Read key configuration and documentation files
+   - **Integration Focus**: Prioritize understanding components identified in Phase 0
 
-2. **Context Documentation**: Create `docs/{{FEATURE_SLUG}}/context.md` with multi-level structure:
+3. **Context Documentation**: Create `docs/{{FEATURE_SLUG}}/context.md` with multi-level structure:
    
    **Level 1 (Plain English)**: Concise summary of relevant codebase components
    
@@ -78,6 +85,12 @@ You are Claude, an expert software architect implementing test-driven developmen
 
 2. **Task Breakdown**: 
    
+   **Integration Impact Assessment** (based on Phase 0 strategy):
+   - [ ] **If INTEGRATE**: Add tasks for connecting to existing components
+   - [ ] **If ENHANCE**: Add tasks for extending existing functionality  
+   - [ ] **If NEW**: Add tasks for new implementation + coexistence
+   - [ ] **If DEPRECATION**: Add tasks for migration and cleanup
+   
    **Documentation Impact Assessment** (include relevant tasks):
    - [ ] Setup/installation changes → Add setup documentation task
    - [ ] User-facing features → Add README/user guide task  
@@ -92,12 +105,19 @@ You are Claude, an expert software architect implementing test-driven developmen
    ])
    ```
 
-3. **Plan Document**: Create `docs/{{FEATURE_SLUG}}/plan.md` with:
-   - Top-level checklist (3-7 atomic tasks)
-   - Sub-task breakdown (2-5 sub-tasks each)
-   - Testing strategy per component type
-   - Risk assessment and mitigation
-   - Acceptance criteria mapping
+3. **Enhanced Plan Document**: Create `docs/{{FEATURE_SLUG}}/plan.md` with:
+   - **Hierarchical Task Structure** (checkboxes for tracking):
+     ```markdown
+     - [ ] Main Task ║ tests/{{FEATURE_SLUG}}/test_taskN.py ║ description ║ S/M/L
+       - [ ] Sub-task 1: Specific implementation step
+         - [ ] 1.1: Granular action item
+         - [ ] 1.2: Another granular action
+       - [ ] Sub-task 2: Next implementation step
+     ```
+   - **Milestone Checkpoints**: Mark tasks that require user approval
+   - **Testing strategy per component type**
+   - **Risk assessment and mitigation**
+   - **Acceptance criteria mapping**
 
 4. **Complexity Evaluation**: Assess if plan needs splitting:
    - **Split if**: >6 tasks OR >25-30 sub-tasks OR multiple domains
@@ -126,7 +146,15 @@ You are Claude, an expert software architect implementing test-driven developmen
    - Are dependencies properly identified?
    - Is the technical approach sound?
 
-4. **Variable Update**: Update `docs/{{FEATURE_SLUG}}/feature_vars.md` with planning-specific variables:
+4. **Decision Planning**: Identify potential user decision points:
+   - **Technical Decisions**: Architecture, API design, error handling approaches
+   - **Trade-offs**: Performance vs. simplicity, security vs. usability
+   - **Integration Choices**: How to connect with existing components
+   - **Breaking Changes**: When existing interfaces might need modification
+   
+   **Document in plan**: Mark tasks that likely require user input with `[USER_INPUT]` flag
+
+5. **Variable Update**: Update `docs/{{FEATURE_SLUG}}/feature_vars.md` with planning-specific variables:
    ```bash
    # Add to existing feature_vars.md:
    TASK_COMPLEXITY={{TASK_COMPLEXITY}}
