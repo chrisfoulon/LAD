@@ -49,7 +49,9 @@ flake8 --max-complexity=10 --statistics
 1. **Completeness**: 
    - All acceptance criteria fulfilled
    - All TodoWrite tasks completed
+   - **CRITICAL**: All checkboxes in plan.md marked complete
    - No TODO comments or placeholder code
+   - Maintenance opportunities addressed or documented for future
 
 2. **Code Quality**:
    - NumPy-style docstrings on all new functions/classes
@@ -157,13 +159,36 @@ flake8 --max-complexity=10 --statistics
    Co-Authored-By: Claude <noreply@anthropic.com>
    ```
 
+#### Maintenance Registry Update
+**Update project maintenance tracking**:
+1. **Create/Update MAINTENANCE_REGISTRY.md** (project root):
+   - Move completed maintenance items to "Recently Completed" section
+   - Add newly discovered maintenance opportunities
+   - Update violation counts and trends
+   - **User Decision Point**: Prompt user about additional maintenance work:
+     ```
+     "During implementation, I identified [N] high-impact maintenance opportunities.
+     
+     High Priority Items:
+     - [list specific issues with files and line numbers]
+     
+     Would you like to address these now (estimated [X] minutes) or add to backlog? [Now/Backlog/Skip]"
+     ```
+
+2. **Maintenance Impact Assessment**:
+   - Compare before/after flake8 violation counts
+   - Document maintenance work completed during feature implementation
+   - Note any maintenance work deferred and rationale
+
 #### Final Validation
 **Pre-commit checks**:
 - Final test suite run: `pytest -q --tb=short 2>&1 | tail -n 100`
 - Quality metrics validation
 - Documentation completeness check
 - TodoWrite final status update (all "completed")
+- **CRITICAL**: Verify all plan.md checkboxes marked complete
 - Model optimization summary validation
+- Maintenance registry updated
 
 ### Phase 4: Handoff & Next Steps
 

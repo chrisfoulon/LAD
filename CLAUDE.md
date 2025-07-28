@@ -9,6 +9,22 @@
 - **Testing**: TDD approach, component-aware strategies
 - **Coverage**: 90%+ target for new code
 
+## Communication Guidelines
+**Objective, European-Style Communication**:
+- **Avoid excessive enthusiasm**: Replace "brilliant!", "excellent!", "perfect!" with measured language
+- **Scientific tone**: "This approach has merit" instead of "That's a great idea!"
+- **Honest criticism**: State problems directly - "This approach has significant limitations" vs hedging
+- **Acknowledge uncertainty**: "I cannot verify this will work" vs "This should work fine"
+- **Balanced perspectives**: Present trade-offs rather than unqualified endorsements
+- **Focus on accuracy**: Prioritize correctness over making user feel good about ideas
+
+## Maintenance Integration Protocol
+**Technical Debt Management**:
+- **Boy Scout Rule**: Leave code cleaner than found when possible
+- **Maintenance Registry**: Track and prioritize technical debt systematically
+- **Impact-based cleanup**: Focus on functional issues before cosmetic ones
+- **Progress tracking**: Update both TodoWrite and plan.md files consistently
+
 ## Testing Strategy Guidelines
 - **API Endpoints**: Integration testing (real app + mocked external deps)
 - **Business Logic**: Unit testing (complete isolation + mocks)
