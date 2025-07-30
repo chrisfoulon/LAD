@@ -105,9 +105,11 @@ flake8 --max-complexity=10 --statistics
    - Add integration notes for complex components
 
 2. **Feature Documentation**:
-   - Update `docs/{{FEATURE_SLUG}}/plan.md` with completion status
+   - **Single Plan**: Update `docs/{{FEATURE_SLUG}}/plan.md` with completion status
+   - **Split Plans**: Update master plan (`plan_master.md`) and all sub-plan files with completion status
    - Document any deviations from original plan
    - Note lessons learned and optimization opportunities
+   - **For Split Plans**: Document integration success and sub-plan effectiveness
 
 3. **Model Optimization Documentation**:
    - Update `feature_vars.md` with final model utilization

@@ -95,87 +95,29 @@ You are Claude providing instructions for ChatGPT review of implementation plans
    Once attachments are provided, invoke the audit.
    ```
 
-5. **Review ChatGPT Response**:
-   - **If ✅ Sound**: Plan is validated, proceed to Phase 2 (Implementation)
-   - **If ❌ Issues**: Address critical issues before proceeding
-   - **If missing attachments**: Ensure files are properly attached and retry
+5. **Save ChatGPT Response**:
+   - Copy the complete ChatGPT response
+   - Save it exactly as received to `docs/{{FEATURE_SLUG}}/review_chatgpt.md`
+   - Do not interpret or modify the response
+   - Proceed to Phase 1d (Review Integration) for analysis and action planning
 
-### Interpreting ChatGPT Feedback
+### Usage Guidelines
 
-**✅ Sound Response**:
-- Plan is ready for implementation
-- Optional minor suggestions can be considered but aren't blocking
-- Proceed to Phase 2 (Iterative Implementation)
+**When to Use ChatGPT Review**:
+- Complex, security-sensitive, or performance-critical features
+- High-risk or high-impact architectural changes
+- When external validation is needed
+- User explicitly requests independent review
 
-**❌ Issues Response**:
-- **🚨 Critical issues**: Must be addressed before implementation
-- **Regular issues**: Should be addressed or explicitly acknowledged
-- **Consider**: Updating plan.md with fixes before proceeding
+**When to Skip**:
+- Simple, straightforward implementations
+- Well-understood patterns
+- Time-constrained projects
+- Low-risk changes
 
-### Integration with Implementation
+### Next Step
 
-**Document ChatGPT Review**:
-1. Save ChatGPT response to `docs/{{FEATURE_SLUG}}/review_chatgpt.md`
-2. If issues were identified, document resolutions
-3. Update plan.md if significant changes were made
-
-**Plan Updates**:
-- Address any critical issues in the implementation plan
-- Consider adding suggested test cases or risk mitigations
-- Update task breakdown if dependency issues were identified
-- Enhance testing strategy based on feedback
-
-### Quality Gates
-
-**Before proceeding to Phase 2**:
-- ✅ ChatGPT review completed (if chosen)
-- ✅ Critical issues resolved or explicitly acknowledged
-- ✅ Plan updated with any necessary changes
-- ✅ Review documentation saved for future reference
-
-### Next Steps
-
-**If ChatGPT review was satisfactory**:
-- Proceed to Phase 2 (Iterative Implementation)
-- Use `.lad/claude_prompts/02_iterative_implementation.md`
-
-**If issues were identified**:
-- Address critical issues in the plan
-- Consider additional validation if needed
-- Update TodoWrite tasks if plan changed significantly
-
-### Alternative: Skip ChatGPT Review
-
-**If you choose to skip ChatGPT review**:
-- Proceed directly to Phase 2 (Iterative Implementation)
-- ChatGPT review can be done later if issues arise during implementation
-- Consider it for complex features or when implementation challenges emerge
-
-**Benefits of ChatGPT Review**:
-- External perspective catches blind spots
-- Different reasoning approach than Claude
-- Structured security and maintainability focus
-- Independent validation of complex plans
-
-**Limitations**:
-- Requires manual file attachment process
-- Additional time investment
-- May identify issues that aren't practically significant
-- Cannot access your specific codebase context beyond attached files
-
-### Deliverables
-
-**If ChatGPT review was performed**:
-1. **ChatGPT Review**: Saved to `docs/{{FEATURE_SLUG}}/review_chatgpt.md`
-2. **Updated Plan**: Modified `docs/{{FEATURE_SLUG}}/plan.md` if needed
-3. **Issue Resolution**: Documentation of how critical issues were addressed
-4. **Go/No-Go Decision**: Clear decision on proceeding to implementation
-
-**Quality Gates**:
-- Independent validation completed
-- Critical issues resolved
-- Plan quality confirmed by external review
-- Implementation readiness verified
+After completing ChatGPT review (or skipping it), proceed to **Phase 1d: Review Integration** to integrate feedback from all review sources and evaluate plan complexity.
 
 </user>
 
