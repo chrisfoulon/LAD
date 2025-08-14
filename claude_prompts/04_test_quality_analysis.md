@@ -5,7 +5,7 @@ You are Claude performing systematic test quality analysis and remediation with 
 
 **Autonomous Capabilities**: Complete test execution, failure analysis, pattern recognition, systematic remediation, and validation using available tools.
 
-**Context Management Protocol**: Use `/compact c` command at natural breakpoints to preserve important context while optimizing token usage. Save critical progress to project documentation files (CLAUDE.md, PROJECT_STATUS.md) before compacting.
+**Context Management Protocol**: Use `/compact <description>` command at natural breakpoints to preserve important context while optimizing token usage. The command requires a space followed by a description of what context to preserve. Save critical progress to project documentation files (CLAUDE.md, PROJECT_STATUS.md) before compacting.
 
 **Token Optimization for Large Test Runs**: For comprehensive test suites or long-running analysis:
 ```bash
@@ -165,7 +165,7 @@ pytest --collect-only | grep -c "collected" # Collection success verification
 ### Context Management & Session Continuity
 
 **Context Optimization Strategy**:
-- Use `/compact c` after completing each major task phase
+- Use `/compact <description>` after completing each major task phase (description summarizes context to preserve)
 - Save detailed progress to project documentation before compacting
 - Maintain working notes in project files for complex analysis
 - Clear context between unrelated test categories to optimize performance

@@ -95,7 +95,7 @@ This captures warnings/errors from anywhere in output while showing final result
 
 1. **Monitor Context Usage**:
    - Watch for context limit warnings in Claude Code UI
-   - Use `/compact c` at natural breakpoints (after major tasks, before new phases)
+   - Use `/compact <description>` at natural breakpoints (after major tasks, before new phases) - requires space + description
    - Clear context with `/clear` between unrelated tasks
 
 2. **Strategic Information Preservation**:
@@ -108,6 +108,13 @@ This captures warnings/errors from anywhere in output while showing final result
    - Create `notes/` files for sustained reasoning across context boundaries
    - Save working progress to documentation before hitting context limits
    - Use file-based communication for long-term knowledge retention
+
+4. **Compact Command Usage** (CRITICAL SYNTAX):
+   - **Format**: `/compact <description>` - MUST include space + description
+   - **Example**: `/compact Completed feature X implementation, next: integrate with Y system`
+   - **Example**: `/compact Fixed critical bugs, test suite passing, ready for next task phase`
+   - **Best Practice**: Summarize current progress and next steps in description
+   - **Timing**: Use at natural breakpoints (feature complete, major milestone, before new phase)
 
 ### Pre-Flight Checklist
 
@@ -379,7 +386,7 @@ This captures warnings/errors from anywhere in output while showing final result
    **Context Management Guidance**:
    - **What to Keep**: Current task context, integration examples, architectural decisions
    - **What to Remove**: Outdated planning discussions, resolved issues, old implementation attempts
-   - **Use `/compact c`**: At natural breakpoints to preserve important context
+   - **Use `/compact <description>`**: At natural breakpoints to preserve important context (must include space + description)
    - **Save Before Compacting**: Move critical insights to permanent documentation files
 
 ### Error Recovery Protocol
