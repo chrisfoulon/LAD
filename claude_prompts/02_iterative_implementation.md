@@ -89,6 +89,26 @@ This captures warnings/errors from anywhere in output while showing final result
 - Assess if failures are related to current feature
 - Document any regressions and address them
 
+### Context Management Strategy
+
+**Proactive Context Optimization** (Critical for Large Projects):
+
+1. **Monitor Context Usage**:
+   - Watch for context limit warnings in Claude Code UI
+   - Use `/compact c` at natural breakpoints (after major tasks, before new phases)
+   - Clear context with `/clear` between unrelated tasks
+
+2. **Strategic Information Preservation**:
+   - **Before Compacting**: Save critical insights to permanent files (CLAUDE.md, PROJECT_STATUS.md, notes/)
+   - **What to Preserve**: Current task context, architectural decisions, integration examples, unresolved issues
+   - **What to Remove**: Resolved planning discussions, old implementation attempts, debug output
+
+3. **Token Efficiency Guidelines**:
+   - Use external memory (Write tool) for complex reasoning and architectural analysis
+   - Create `notes/` files for sustained reasoning across context boundaries
+   - Save working progress to documentation before hitting context limits
+   - Use file-based communication for long-term knowledge retention
+
 ### Pre-Flight Checklist
 
 **Before starting/continuing implementation**:
@@ -337,10 +357,30 @@ This captures warnings/errors from anywhere in output while showing final result
 
 3. **Commit Workflow Integration**: Handled by checkpoint system (Phase 2b)
 
-4. **Documentation Updates**:
+4. **Comprehensive Documentation Updates** (CRITICAL - Often Forgotten):
+   
+   **Core LAD Documentation**:
    - Add new APIs to Level 2 table in context docs
    - Update any changed interfaces or contracts
    - Track quality metrics: coverage, complexity, test count
+   
+   **Plan File Updates** (MANDATORY):
+   - **Single Plan**: Update `docs/{{FEATURE_SLUG}}/plan.md` - mark completed tasks as `- [x] Task`
+   - **Split Plans**: Update BOTH master plan AND current sub-plan (e.g., `plan_2_processing.md`)
+   - **Sub-tasks**: Check off completed sub-task items in plan files
+   - **Context Files**: Update corresponding context files with actual deliverables
+   
+   **Project Status Documentation** (If Present):
+   - **CLAUDE.md**: Update with current feature status and progress notes
+   - **PROJECT_STATUS.md**: Update project health metrics and current focus
+   - **README.md**: Update if new major functionality affects usage instructions
+   - **CHANGELOG.md**: Add entry if versioned releases are tracked
+   
+   **Context Management Guidance**:
+   - **What to Keep**: Current task context, integration examples, architectural decisions
+   - **What to Remove**: Outdated planning discussions, resolved issues, old implementation attempts
+   - **Use `/compact c`**: At natural breakpoints to preserve important context
+   - **Save Before Compacting**: Move critical insights to permanent documentation files
 
 ### Error Recovery Protocol
 
@@ -377,12 +417,20 @@ This captures warnings/errors from anywhere in output while showing final result
    - Verify that components behave as expected with simple usage tests
    - Document any interface changes or additional functionality discovered
 
-3. **Update Next Sub-Plan Context**: 
+3. **Update All Related Documentation**:
+   
+   **Next Sub-Plan Context Updates**: 
    - Open next sub-plan's context file (e.g., `context_3_interface.md`)
    - **Add working integration examples** from current sub-plan
    - **Document actual interfaces available** (not just planned ones)
    - **Update usage patterns** with tested code snippets
    - **Note any changes** from original integration plan
+   
+   **Master Documentation Updates**:
+   - **Master Plan**: Update `plan_master.md` with current sub-plan completion status
+   - **Global Context**: Update main `context.md` with cross-sub-plan integration insights
+   - **Project Status Files**: Update CLAUDE.md and PROJECT_STATUS.md with sub-plan completion
+   - **Plan Sequence**: Update any sub-plan sequence documentation with lessons learned
 
 #### Step 2: Sub-Plan Transition Decision
 If integration challenges or architectural questions arise, prompt for user guidance:
