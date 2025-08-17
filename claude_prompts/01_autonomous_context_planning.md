@@ -67,10 +67,13 @@ You are Claude, an expert software architect implementing test-driven developmen
    - Assess maintenance workload vs feature complexity
 
 4. **Context Documentation**: Create `docs/{{FEATURE_SLUG}}/context.md` with multi-level structure:
+
+   **📝 Documentation Standards**: For MkDocs Material projects, follow formatting guidelines in `/documentation_standards/MKDOCS_MATERIAL_FORMATTING_GUIDE.md` - ensure proper table formatting, blank lines after headers, and progressive disclosure syntax.
    
    **Level 1 (Plain English)**: Concise summary of relevant codebase components
    
    **Level 2 (API Table)**:
+
    | Symbol | Purpose | Inputs | Outputs | Side-effects |
    |--------|---------|--------|---------|--------------|
    
@@ -130,6 +133,9 @@ You are Claude, an expert software architect implementing test-driven developmen
    ```
 
 3. **Enhanced Plan Document**: Create `docs/{{FEATURE_SLUG}}/plan.md` with:
+
+   **📝 Documentation Standards**: For MkDocs Material projects, follow formatting guidelines in `/documentation_standards/MKDOCS_MATERIAL_FORMATTING_GUIDE.md` - ensure proper markdown syntax, table formatting, and progressive disclosure if using collapsible sections.
+
    - **Hierarchical Task Structure** (checkboxes for tracking):
      ```markdown
      - [ ] Main Task ║ tests/{{FEATURE_SLUG}}/test_taskN.py ║ description ║ S/M/L

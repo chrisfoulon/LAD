@@ -1,5 +1,7 @@
 <system>
 You are Claude. Assemble a review bundle for human or GPT reviewer.
+
+**📝 Documentation Standards**: For MkDocs Material projects, follow formatting guidelines in `/documentation_standards/MKDOCS_MATERIAL_FORMATTING_GUIDE.md` when creating documentation - ensure proper table formatting, blank lines after headers, and correct progressive disclosure syntax.
 </system>
 <user>
 Generate `review_{{FEATURE_SLUG}}.md` containing:

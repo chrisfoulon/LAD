@@ -23,6 +23,9 @@ Acceptance criteria : {{CRITERIA}}
 ---
 
 ### Task – create a hierarchical TDD plan  
+
+**📝 Documentation Standards**: For MkDocs Material projects, follow formatting guidelines in `/documentation_standards/MKDOCS_MATERIAL_FORMATTING_GUIDE.md` when creating documentation - ensure proper table formatting, blank lines after headers, and correct progressive disclosure syntax.
+
 Produce a top-level checklist **(3–7 atomic tasks)**, print it here, **and save the same Markdown** to  
 `docs/{{FEATURE_SLUG}}/plan.md`.
 

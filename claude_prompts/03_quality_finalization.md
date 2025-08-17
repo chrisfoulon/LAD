@@ -99,6 +99,9 @@ flake8 --max-complexity=10 --statistics
 #### Documentation Updates
 
 **Update all documentation**:
+
+**📝 Documentation Standards**: For MkDocs Material projects, follow formatting guidelines in `/documentation_standards/MKDOCS_MATERIAL_FORMATTING_GUIDE.md` when updating documentation - ensure proper table formatting, blank lines after headers, progressive disclosure syntax, and automated validation setup.
+
 1. **Context Documents**: 
    - Refresh Level 2 API tables with new functions
    - Update Level 3 code snippets if interfaces changed

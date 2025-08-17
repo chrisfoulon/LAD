@@ -316,6 +316,9 @@ This captures warnings/errors from anywhere in output while showing final result
   - Deployment verification: Ensure feature works in target environment
   
 - **Context Update**: Update context file with actual deliverables (not just planned ones)
+
+  **📝 Documentation Standards**: For MkDocs Material projects, follow formatting guidelines in `/documentation_standards/MKDOCS_MATERIAL_FORMATTING_GUIDE.md` when updating documentation - ensure proper table formatting, blank lines after headers, and correct progressive disclosure syntax.
+
   - Document what was actually built vs. what was planned
   - Add working integration/usage examples appropriate to feature type
   - Note any deviations or additional functionality discovered
@@ -367,6 +370,9 @@ This captures warnings/errors from anywhere in output while showing final result
 4. **Comprehensive Documentation Updates** (CRITICAL - Often Forgotten):
    
    **Core LAD Documentation**:
+
+   **📝 Documentation Standards**: For MkDocs Material projects, follow formatting guidelines in `/documentation_standards/MKDOCS_MATERIAL_FORMATTING_GUIDE.md` when updating documentation - ensure proper table formatting, blank lines after headers, and correct progressive disclosure syntax.
+
    - Add new APIs to Level 2 table in context docs
    - Update any changed interfaces or contracts
    - Track quality metrics: coverage, complexity, test count
