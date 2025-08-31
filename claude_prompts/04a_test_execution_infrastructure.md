@@ -11,6 +11,8 @@ You are Claude establishing systematic test execution infrastructure with timeou
 ```
 
 **Context Management**: Use `/compact <description>` after completing execution phases to preserve test results while optimizing context.
+
+**CRITICAL**: Before any code modifications during phase 04 execution, follow the **Regression Risk Management Protocol** below to prevent destabilizing mature codebases.
 </system>
 
 <user>
@@ -19,6 +21,168 @@ You are Claude establishing systematic test execution infrastructure with timeou
 **Purpose**: Establish systematic test execution capabilities that prevent timeouts and provide comprehensive baseline analysis for large test suites.
 
 **Scope**: Test execution infrastructure setup - foundation for subsequent analysis phases.
+
+### ⚠️ **Regression Risk Management Protocol**
+
+**MANDATORY** before any code changes during phases 04a-04d. For mature codebases with complex integration points, systematic risk assessment prevents regressions in working systems.
+
+#### Pre-Change Impact Analysis
+
+**1. Codebase Context Mapping**:
+```bash
+# Analyze affected components and their interactions
+target_function="function_to_modify"
+echo "# Impact Analysis for: $target_function" > impact_analysis.md
+
+# Find all references and dependencies
+echo "## Direct References:" >> impact_analysis.md
+grep -r "$target_function" --include="*.py" . >> impact_analysis.md
+
+# Check import dependencies
+echo "## Import Dependencies:" >> impact_analysis.md  
+grep -r "from.*import.*$target_function\|import.*$target_function" --include="*.py" . >> impact_analysis.md
+
+# Identify calling patterns
+echo "## Calling Patterns:" >> impact_analysis.md
+grep -r "$target_function(" --include="*.py" . -A 2 -B 2 >> impact_analysis.md
+```
+
+**2. Documentation Cross-Reference**:
+```bash
+# Check if change affects documented behavior
+echo "## Documentation Impact:" >> impact_analysis.md
+grep -r "$target_function" docs/ README.md *.md 2>/dev/null >> impact_analysis.md
+
+# Verify user guide examples remain valid
+grep -r "$target_function" docs/USER_GUIDE.md docs/QUICK_START.md 2>/dev/null >> impact_analysis.md
+
+# Check API documentation accuracy
+grep -r "$target_function" docs/API_REFERENCE.md docs/**/api*.md 2>/dev/null >> impact_analysis.md
+```
+
+**3. Integration Point Analysis**:
+```bash
+# Map critical system interactions
+echo "## Integration Points:" >> impact_analysis.md
+
+# Statistical analysis pipeline interactions
+grep -r "$target_function" emuses/**/statistical*.py emuses/**/analysis*.py 2>/dev/null >> impact_analysis.md
+
+# Model registry interactions
+grep -r "$target_function" emuses/**/model_registry*.py emuses/**/registry*.py 2>/dev/null >> impact_analysis.md
+
+# Multi-user service compatibility  
+grep -r "$target_function" emuses/**/service*.py emuses/**/multi_user*.py 2>/dev/null >> impact_analysis.md
+
+# CLI and API endpoints
+grep -r "$target_function" emuses/cli/*.py emuses/api/*.py 2>/dev/null >> impact_analysis.md
+```
+
+**4. Test Impact Prediction**:
+```bash
+# Identify which test categories could be affected
+echo "## Affected Test Categories:" >> impact_analysis.md
+grep -r "$target_function" tests/ --include="*.py" | cut -d'/' -f2 | sort -u >> impact_analysis.md
+
+# Find specific test files
+echo "## Specific Test Files:" >> impact_analysis.md
+grep -l "$target_function" tests/**/*.py 2>/dev/null >> impact_analysis.md
+```
+
+#### Change Safety Protocol
+
+**5. Baseline Establishment**:
+```bash
+# Commit current working state before changes
+git add -A
+git commit -m "baseline: pre-change checkpoint for $target_function modification
+
+Impact analysis completed in impact_analysis.md
+Safe to proceed with targeted changes.
+
+This commit enables clean rollback if regressions occur."
+
+# Run focused pre-change test validation
+echo "## Pre-Change Test Results:" >> impact_analysis.md
+pytest $(grep -l "$target_function" tests/**/*.py 2>/dev/null) -v --tb=short >> impact_analysis.md 2>&1
+```
+
+**6. Rollback Strategy**:
+```bash
+# Document specific tests that must pass post-change
+echo "## Post-Change Validation Requirements:" >> impact_analysis.md
+echo "- All tests in affected categories must remain green" >> impact_analysis.md
+echo "- Integration tests for related components must pass" >> impact_analysis.md
+echo "- Documentation examples must remain accurate" >> impact_analysis.md
+echo "- API compatibility must be preserved" >> impact_analysis.md
+
+# Store rollback command for quick recovery
+echo "# Rollback command if needed:" >> impact_analysis.md
+echo "git reset --hard $(git rev-parse HEAD)" >> impact_analysis.md
+```
+
+#### Risk Assessment Matrix
+
+**Low Risk Changes** (proceed with standard validation):
+- Test fixture improvements, test data updates
+- Documentation clarifications, comment additions
+- Logging enhancements, debug output improvements
+- Non-functional refactoring within single modules
+
+**Medium Risk Changes** (requires focused validation):
+- Algorithm parameter adjustments, performance optimizations
+- Error handling improvements, validation enhancements
+- Configuration changes, environment variable modifications
+- API response format changes (backward compatible)
+
+**High Risk Changes** (requires comprehensive validation):
+- Core algorithm modifications, statistical analysis changes
+- Database schema changes, model registry structure changes
+- Multi-user authentication/authorization changes
+- Breaking API changes, CLI interface modifications
+
+#### Validation Protocol Post-Change
+
+**Immediate Validation** (run after each change):
+```bash
+# Test affected categories immediately
+pytest $(grep -l "$target_function" tests/**/*.py 2>/dev/null) -x --tb=short
+
+# Quick integration smoke test
+python scripts/dev_test_runner.py
+
+# Verify documentation examples still work
+python -c "exec(open('docs/examples/validate_examples.py').read())" 2>/dev/null || echo "No example validation script"
+```
+
+**Comprehensive Validation** (before committing):
+```bash
+# Full category testing for affected areas
+affected_categories=$(grep -r "$target_function" tests/ --include="*.py" | cut -d'/' -f2 | sort -u | tr '\n' ' ')
+for category in $affected_categories; do
+    pytest tests/$category/ -q --tb=short
+done
+
+# Cross-integration validation
+pytest tests/integration/ -k "$target_function" -v --tb=short 2>/dev/null || echo "No integration tests found"
+```
+
+### ⚠️ **Emergency Rollback Procedure**
+
+If regressions are detected during phases 04:
+
+```bash
+# Immediate rollback to baseline
+git reset --hard baseline_commit_hash
+
+# Verify rollback success
+python scripts/dev_test_runner.py
+
+# Document rollback in analysis
+echo "## ROLLBACK EXECUTED: $(date)" >> impact_analysis.md
+echo "Reason: [describe regression detected]" >> impact_analysis.md
+echo "Recovery: Baseline restored, ready for alternative approach" >> impact_analysis.md
+```
 
 ### Systematic Test Execution Protocol
 

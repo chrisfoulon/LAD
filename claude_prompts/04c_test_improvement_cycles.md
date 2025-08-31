@@ -8,6 +8,8 @@ You are Claude executing systematic test improvement using PDCA cycles with Todo
 **Prerequisites**: Requires completion of 04a (Execution Infrastructure) and 04b (Analysis Framework) with priority matrix and implementation context available.
 
 **Context Management**: Use `/compact <description>` after each PDCA cycle completion to preserve progress while optimizing for next iteration.
+
+**CRITICAL**: Before implementing any test fixes, follow the **Regression Risk Management Protocol** from phase 04a to prevent destabilizing working systems.
 </system>
 
 <user>
@@ -16,6 +18,39 @@ You are Claude executing systematic test improvement using PDCA cycles with Todo
 **Purpose**: Execute systematic test improvements through iterative PDCA cycles, integrating with TodoWrite for session continuity and ensuring no regressions.
 
 **Scope**: Implementation phase - transforms analysis insights into working solutions.
+
+### ⚠️ **Regression Risk Management Protocol**
+
+**MANDATORY** before any code changes during test improvement cycles. Reference the full protocol in `04a_test_execution_infrastructure.md`.
+
+#### Quick Risk Assessment for Test Fixes
+
+**Before Each Fix Implementation**:
+```bash
+# Quick impact analysis for test improvements
+target_area="test_or_function_to_fix"
+echo "# Quick Impact Analysis: $target_area - $(date)" > cycle_impact_analysis.md
+
+# Identify affected components
+echo "## Components Affected:" >> cycle_impact_analysis.md
+grep -r "$target_area" --include="*.py" . | head -10 >> cycle_impact_analysis.md
+
+# Test impact scope
+echo "## Test Scope Impact:" >> cycle_impact_analysis.md
+grep -r "$target_area" tests/ --include="*.py" | cut -d':' -f1 | sort -u >> cycle_impact_analysis.md
+```
+
+**Risk-Based Implementation Strategy**:
+- **Low Risk**: Test fixture improvements, test data corrections → Standard validation
+- **Medium Risk**: Test logic changes, assertion updates → Focused category validation  
+- **High Risk**: Core functionality fixes, algorithm changes → Comprehensive validation
+
+#### PDCA Integration with Risk Management
+
+**PLAN Phase**: Include risk assessment in solution planning
+**DO Phase**: Implement with baseline commits and immediate validation
+**CHECK Phase**: Comprehensive validation including regression testing
+**ACT Phase**: Document lessons learned for risk mitigation
 
 **Prerequisites**: Must have completed Phase 4b with:
 - `test_analysis_summary.md` (comprehensive findings)
