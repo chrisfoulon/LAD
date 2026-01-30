@@ -72,11 +72,14 @@ Import the complete `.lad/` directory into any target project once on main.
 
 ### 2.1 Quick Setup
 1. **Install Claude Code**: Follow [Claude Code installation guide](https://docs.anthropic.com/en/docs/claude-code)
-2. **Import LAD framework**:
+2. **Import LAD framework** (using git subtree):
    ```bash
-   git clone --depth 1 https://github.com/chrisfoulon/LAD tmp \
-     && rm -rf tmp/.git && mv tmp .lad \
-     && git add .lad && git commit -m "feat: add LAD framework"
+   git subtree add --prefix .lad https://github.com/chrisfoulon/LAD main --squash
+   ```
+
+   To update the framework later:
+   ```bash
+   git subtree pull --prefix .lad https://github.com/chrisfoulon/LAD main --squash
    ```
 3. **Create feature branch**: `git checkout -b feat/<slug>`
 
@@ -224,13 +227,16 @@ Import the complete `.lad/` directory into any target project once on main.
 ### 3.1 Quick‑Setup Checklist
 
 1. Enable **Copilot Chat + Agent Mode** in VS Code.
-2. **Import LAD kit once on main** (one-time setup):
+2. **Import LAD kit once on main** (using git subtree):
    ```bash
-   git clone --depth 1 https://github.com/chrisfoulon/LAD tmp \
-     && rm -rf tmp/.git \
-     && mv tmp .lad \
-     && git add .lad && git commit -m "feat: add LAD framework"
-   ```   * **Initialize coverage**: if `.coveragerc` is missing, scaffold it as above (branch=True, dynamic_context=test_function, omit `.lad/*`, show_missing=True, HTML dir `coverage_html`), then **manually** run:
+   git subtree add --prefix .lad https://github.com/chrisfoulon/LAD main --squash
+   ```
+
+   To update the framework later:
+   ```bash
+   git subtree pull --prefix .lad https://github.com/chrisfoulon/LAD main --squash
+   ```
+   * **Initialize coverage**: if `.coveragerc` is missing, scaffold it as above (branch=True, dynamic_context=test_function, omit `.lad/*`, show_missing=True, HTML dir `coverage_html`), then **manually** run:
      ```bash
      coverage run -m pytest [test_files] -q && coverage html
      ```

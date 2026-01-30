@@ -30,14 +30,15 @@ LAD supports two autonomous workflows optimized for different development enviro
 **Multi-phase autonomous workflow for command-line development**
 
 ```bash
-# Quick Setup
-git clone --depth 1 https://github.com/chrisfoulon/LAD tmp \
-  && rm -rf tmp/.git && mv tmp .lad \
-  && git add .lad && git commit -m "feat: add LAD framework"
+# Quick Setup (using git subtree)
+git subtree add --prefix .lad https://github.com/chrisfoulon/LAD main --squash
 
 # Feature Development
 git checkout -b feat/my-feature
 # Tell Claude Code: "Use LAD framework to implement [feature description]"
+
+# Update LAD framework (when needed)
+git subtree pull --prefix .lad https://github.com/chrisfoulon/LAD main --squash
 ```
 
 **Example: Starting a new feature**
@@ -55,7 +56,7 @@ Claude: I'll use the LAD framework to implement user authentication. Let me star
 **⚠️ Requires Copilot Agent Mode - standard Copilot Chat alone will not work with LAD**
 
 ```bash
-# Same LAD import as above
+# Same LAD import as above (git subtree add)
 git checkout -b feat/my-feature
 # Tell Copilot Agent: "Use LAD framework to implement [feature description]"
 ```
