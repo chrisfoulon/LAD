@@ -9,7 +9,7 @@
       "name": "lad",
       "source": "./",
       "description": "LLM-Assisted Development: a staged workflow for building Python features safely — existing-work discovery, TDD planning, checkpointed implementation, and test-suite quality cycles.",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "author": {
         "name": "Chris Foulon"
       }
