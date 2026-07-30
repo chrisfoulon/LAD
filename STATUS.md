@@ -10,11 +10,20 @@ modes that actually recur, without accumulating content nobody reads.
 (PR #5 merged). `/plugin marketplace add chrisfoulon/LAD` → `/plugin install lad@lad` verified
 working end to end. `8552 lines → ~1150`.
 
-Skills: `lad-standards` (model-invoked background), then the feature pipeline —
+Nine skills: `lad-standards` (model-invoked background), then the feature pipeline —
 `feature-kickoff` → `plan-feature` → `implement-feature` → `finalize-feature` →
-`consolidate-feature` (post-merge) — plus `test-quality` and `maintenance-session` standalone.
-A `SessionStart` hook announces the pipeline; its skill list is derived from the skills directory,
-so it cannot drift from what exists. Keep it that way.
+`consolidate-feature` (post-merge) — plus `test-quality`, `maintenance-session` and `converge`
+standalone. A `SessionStart` hook announces them; the list is discovered from the skills directory
+(pipeline order is the only thing it hardcodes), so it cannot drift. Keep it that way.
+
+**Competitive position, researched 2026-07-30.** LAD's first commit (2025-06-11) predates GitHub
+Spec Kit (2025-09-02) and Anthropic Agent Skills (2025-10-16) by 3–4 months. The space is now
+saturated — Spec Kit has 93k+ stars, and 965 of 2283 community plugins match workflow/planning
+keywords — so there is no case for LAD as a *public product*. The case for personal use holds: the
+guardrail registry is grounded in specific observed lapses, which no general tool can be. Notably,
+Spec Kit is documented as weakest on large brownfield codebases, which is EMUSES's exact situation;
+OpenSpec is the brownfield-oriented alternative if one is ever wanted. Conclusion: keep using it,
+stop investing in it as a product, borrow good ideas rather than switching.
 
 Pre-rewrite tree is tagged `v1-prompts` (pushed) — the recovery path for 8172 deleted lines.
 
@@ -52,6 +61,12 @@ Note: `/reload-plugins` reports `0 skills` for this plugin. Cosmetic — that co
 - [ ] Dogfood `consolidate-feature` on this rewrite: condense `docs/lad-v2/` into
       `docs/decisions/lad-v2.md`. Would both test the skill and capture *why* Copilot was dropped
       and subtree gave way to a plugin — the two decisions most likely to be second-guessed later.
-- [ ] v2 is unproven in daily use. The open question is whether the eight skills are the right
+- [ ] **Decide where `consolidate-feature` writes in EMUSES.** It currently creates
+      `<docs>/decisions/<slug>.md`, but EMUSES already tracks `.codebase-memory/adr.md` in git —
+      the one artefact re-indexing cannot regenerate. Two homes for decision rationale is the same
+      split-brain this rewrite removed elsewhere. Leaning: append to an existing ADR where one is
+      found, fall back to `decisions/` otherwise, same principle as following `dev-docs/`.
+      Not implemented — needs the user's call.
+- [ ] v2 is unproven in daily use. The open question is whether the nine skills are the right
       seams, which only using them on a real feature will answer. Watch for stages that get skipped
       or that need re-invoking to stick.
