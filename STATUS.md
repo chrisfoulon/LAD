@@ -61,12 +61,9 @@ Note: `/reload-plugins` reports `0 skills` for this plugin. Cosmetic — that co
 - [ ] Dogfood `consolidate-feature` on this rewrite: condense `docs/lad-v2/` into
       `docs/decisions/lad-v2.md`. Would both test the skill and capture *why* Copilot was dropped
       and subtree gave way to a plugin — the two decisions most likely to be second-guessed later.
-- [ ] **Decide where `consolidate-feature` writes in EMUSES.** It currently creates
-      `<docs>/decisions/<slug>.md`, but EMUSES already tracks `.codebase-memory/adr.md` in git —
-      the one artefact re-indexing cannot regenerate. Two homes for decision rationale is the same
-      split-brain this rewrite removed elsewhere. Leaning: append to an existing ADR where one is
-      found, fall back to `decisions/` otherwise, same principle as following `dev-docs/`.
-      Not implemented — needs the user's call.
+- [ ] Confirm `consolidate-feature` picks the right home on EMUSES's real
+      `.codebase-memory/adr.md` — it should append there rather than start `dev-docs/decisions/`.
+      Logic is implemented and reads correctly in a cold session, but has not met the actual file.
 - [ ] v2 is unproven in daily use. The open question is whether the nine skills are the right
       seams, which only using them on a real feature will answer. Watch for stages that get skipped
       or that need re-invoking to stick.
