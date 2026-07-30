@@ -16,9 +16,16 @@ for s in feature-kickoff plan-feature implement-feature finalize-feature consoli
   [ -f "$root/skills/$s/SKILL.md" ] && pipeline+=("/lad:$s")
 done
 
+# Everything else on disk that a user can actually invoke. Discovered rather than
+# listed, so adding a skill needs no edit here — only the pipeline order above is
+# knowledge this script has to hold.
 standalone=()
-for s in test-quality maintenance-session; do
-  [ -f "$root/skills/$s/SKILL.md" ] && standalone+=("/lad:$s")
+for d in "$root"/skills/*/; do
+  s=$(basename "$d")
+  [ -f "$d/SKILL.md" ] || continue
+  case " ${pipeline[*]} " in *" /lad:$s "*) continue ;; esac
+  grep -qiE '^user-invocable:[[:space:]]*(false|no|off|0)' "$d/SKILL.md" && continue
+  standalone+=("/lad:$s")
 done
 
 [ ${#pipeline[@]} -eq 0 ] && [ ${#standalone[@]} -eq 0 ] && exit 0

@@ -17,18 +17,33 @@ summary it has to re-derive from scratch.
 is worth very little. `src/cli/commands.py:142 build_parser()` is worth a great deal. Every claim
 you record should be something the next stage can open.
 
-## 1. Is the request clear enough to act on?
+## 1. State the requirement, in writing, before looking at any code
 
-Stop and ask if you cannot answer all of these:
+This comes first for a reason. If you explore the codebase before the requirement is pinned down,
+the requirement quietly reshapes itself around what is convenient to build: you extend the existing
+writer, it only handles the single-target case, and single-target ships as "done". Nobody decided
+that. It happened because there was no written statement to check against.
 
-- What specific behaviour should exist when this is done?
-- What are the inputs and outputs?
-- What would make it *not* complete?
+Answer all of these. **Stop and ask if you cannot.**
+
+- **Behaviour** — what specifically should be true when this is done?
+- **Inputs / outputs** — what goes in, what comes out?
+- **Constraints** — what must it not break, exceed, or assume?
+- **Acceptance criteria** — what would make it *not* complete?
 
 Vague requests ("add an API", "make it faster") produce plans that look complete and satisfy nobody.
-One round of questions here is cheaper than a wrong implementation.
+One round of questions is cheaper than a wrong implementation.
 
-If the request is clear, derive a short kebab-case `<slug>` from it and continue.
+**Keep this technology-free.** This is the *what* and *why*, not the *how*. No module names, no
+libraries, no file paths — those are decisions for later, and mixing them in here is how an
+implementation detail gets promoted to a requirement without anyone noticing.
+
+Derive a short kebab-case `<slug>`, then **write the requirement to `<docs>/<slug>/context.md`
+now**, before step 2. See the template in step 6; fill in the Request section and leave the rest.
+
+> Discovery in the next step may change the **approach**. It must not change the **goal**. If what
+> you find genuinely means the requirement was wrong, say so explicitly and re-agree it with the
+> user — never silently narrow it to fit what already exists.
 
 ## 2. Find what already exists — as resolvable references
 
@@ -105,19 +120,27 @@ on `feat/<slug>`.
 If `.flake8` or `.coveragerc` is missing, mention it, but do not scaffold project-wide config as a
 side effect of starting a feature unless asked.
 
-## 6. Write the context file
+## 6. Complete the context file
 
 **Use the project's existing convention for development docs.** Many projects already have one —
 `dev-docs/`, `doc/`, `notes/`. Check before creating anything, and follow what is there; only fall
 back to `docs/<slug>/` when the project has no convention. Below, `<docs>` means whichever applies.
 
-Create `<docs>/<slug>/context.md`:
+The Request section was written in step 1. Fill in the rest now — and if anything in discovery
+changed the Request, flag the change rather than editing it silently.
+
+`<docs>/<slug>/context.md`:
 
 ```markdown
 # Context — <slug>
 
 ## Request
-<the clarified request, including answers to any questions asked>
+**Behaviour**: <what should be true when this is done>
+**Inputs / outputs**: <what goes in, what comes out>
+**Constraints**: <what it must not break, exceed, or assume>
+**Acceptance criteria**: <what would make this not complete>
+
+<written before discovery; technology-free. Changes after this point are re-agreed, not assumed.>
 
 ## Strategy
 <Integrate|Enhance|Build new|Rebuild> — <why, in one or two sentences>

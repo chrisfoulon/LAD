@@ -43,7 +43,9 @@ from the installed plugin, so every project gets the same version and updates ar
 git checkout -b feat/export-csv
 
 > /lad:feature-kickoff export analysis results to CSV
-    asks what "results" means if it is ambiguous; finds `ResultWriter` at
+    first pins the requirement in writing — behaviour, inputs/outputs, constraints,
+    acceptance criteria — with no technology in it, and stops to ask if any of that
+    is unanswerable. Only then looks at code: finds `ResultWriter` at
     src/io/writers.py:88 already does half of it; recommends Enhance over Build new;
     records the test baseline. Writes dev-docs/export-csv/context.md
 
@@ -80,6 +82,7 @@ Two more, used on their own:
 |---|---|
 | **`test-quality`** | Repairs a failing or unreliable suite: real baseline, root-cause classification, prioritised batches of fixes |
 | **`maintenance-session`** | Technical debt triaged by actual impact, not by violation count |
+| **`converge`** | Whole-codebase drift check: does the code still match what the decision records, ADRs and docs claim? Reports, does not fix |
 
 `lad-standards` runs in the background — Claude loads it when writing Python. It holds the project's
 conventions and the guardrail registry.
