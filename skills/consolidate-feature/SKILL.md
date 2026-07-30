@@ -1,6 +1,6 @@
 ---
 name: consolidate-feature
-description: Final stage of the LAD feature workflow, run after a feature is merged. Condenses the working plan and context files into one durable decision record, updates the decisions index, harvests any new guardrails, and prunes the working files. Use after merging a feature, or when asked to write up what was done and why.
+description: Final stage of the LAD feature workflow, run after a feature is merged. Condenses the working plan and context files into a durable record — appended to the project's existing ADR where one exists, or a new decision record where none does — harvests any new guardrails, and prunes the working files. Use after merging a feature, or when asked to write up what was done and why.
 argument-hint: [feature slug]
 ---
 
@@ -28,9 +28,53 @@ Do not write this from the plan alone — the plan says what was intended.
 Where intent and outcome differ, the outcome is the record. Note the difference; it is often the
 most useful line in the document.
 
-## 2. Write `<docs>/decisions/<slug>.md`
+## 2. Find where decisions already live
 
-Aim for one page. If it runs much longer, it is holding detail that belongs in the code.
+**Do not create a second home for decision rationale.** Many projects already have one, and adding
+a parallel tree beside it means future sessions read whichever they happen to find. Check, in order:
+
+```bash
+ls .codebase-memory/adr.md ADR.md ARCHITECTURE_DECISIONS.md 2>/dev/null
+ls -d docs/adr doc/adr docs/decisions 2>/dev/null
+```
+
+Three cases, and they are handled differently:
+
+| Found | Do |
+|---|---|
+| **A single ADR file** (e.g. `.codebase-memory/adr.md`) | Append a section, in that file's existing format |
+| **A directory of numbered records** (`doc/adr/0004-*.md`) | Add the next numbered file, following the local naming and template |
+| **Nothing** | Create `<docs>/decisions/<slug>.md` and its index, as in step 3b |
+
+Read what is already there before writing. Match its structure and heading style rather than
+imposing LAD's — a record nobody can scan alongside its neighbours is worth less than a slightly
+imperfect one that reads consistently.
+
+If `codebase-memory-mcp` is available and the project uses `.codebase-memory/adr.md`, prefer
+`manage_adr` over editing the file directly, and call it with `mode: get` first to see the existing
+structure. The file is tracked in git either way, so a direct edit is not wrong — it just risks
+diverging from whatever shape the tool maintains.
+
+## 3a. When an ADR exists
+
+An ADR is organised **by decision, not by feature**. This matters: some features produce no
+architecturally significant decision at all, and forcing an entry for every one is how an ADR turns
+into a changelog nobody reads.
+
+Record only what is durable and would not be obvious to someone reading the code later:
+
+- **The choices and why** — including the constraint or trade-off that drove each
+- **Alternatives rejected**, and what would make them right in future
+- **Limitations and open issues** the feature introduces or leaves behind
+
+Deliberately skip the transient parts. "What was built" is recoverable from the code and the graph;
+"deviations from plan" stops mattering once the plan is gone. If nothing survives that filter, say
+so and add nothing — that is a correct outcome, not a failure.
+
+## 3b. When there is no ADR
+
+Write `<docs>/decisions/<slug>.md`. Aim for one page. If it runs much longer, it is holding detail
+that belongs in the code.
 
 ```markdown
 # <slug>
@@ -59,9 +103,7 @@ cannot see what was already ruled out will propose it again, confidently.
 Write for someone with no memory of the work — which in practice means every future session, and
 you in six months.
 
-## 3. Update the index
-
-Add one line to `<docs>/DECISIONS.md`, newest first (create it if absent):
+Then add one line to `<docs>/DECISIONS.md`, newest first (create it if absent):
 
 ```markdown
 # Decisions
@@ -69,7 +111,9 @@ Add one line to `<docs>/DECISIONS.md`, newest first (create it if absent):
 - [<slug>](decisions/<slug>.md) — <one-line hook: what changed and why it mattered> (YYYY-MM-DD)
 ```
 
-One line per feature. The index is for finding the record, not for summarising it.
+One line per feature. The index is for finding the record, not for summarising it. An index is only
+needed for the one-file-per-feature layout — a single ADR file is already its own index, and a
+numbered-record directory usually has a convention of its own.
 
 ## 4. Harvest guardrails
 
@@ -98,5 +142,7 @@ anything it settled should supersede the older lines rather than being appended 
 
 ## Report
 
-Say where the record was written, what you added to the index, any guardrail changes proposed, and
-what you are suggesting be pruned.
+Say **which decision home you found and why** — an existing ADR, a numbered-record directory, or
+nothing — then what you wrote there, any guardrail changes proposed, and what you suggest pruning.
+If you concluded the feature warranted no ADR entry, say that explicitly; silence reads as an
+oversight rather than a judgement.
