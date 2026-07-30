@@ -1,0 +1,11 @@
+{
+  "name": "lad",
+  "description": "LLM-Assisted Development: a staged workflow for building Python features safely — existing-work discovery, TDD planning, checkpointed implementation, and test-suite quality cycles.",
+  "version": "2.0.0",
+  "author": {
+    "name": "Chris Foulon"
+  },
+  "homepage": "https://github.com/chrisfoulon/LAD",
+  "repository": "https://github.com/chrisfoulon/LAD",
+  "license": "MIT"
+}
