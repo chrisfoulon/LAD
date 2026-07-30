@@ -146,8 +146,9 @@ absence of sightings only.
 ## Open questions / next
 Task-level breakdown and what each skill replaced is in `docs/lad-v2/plan.md`.
 
-- [ ] **Commit and push.** Everything is staged. `v1-prompts` tag marks the pre-rewrite tree; it is
-      local only and should be pushed alongside.
+- [ ] **Merge PR #5** (https://github.com/chrisfoulon/LAD/pull/5, branch `feat/lad-v2-plugin`).
+      This is the gate: `/plugin marketplace add chrisfoulon/LAD` reads `main`, so nothing can
+      install LAD v2 until it is merged. Tag `v1-prompts` is pushed and marks the pre-rewrite tree.
 - [ ] **C4 — migrate EMUSES.** Handoff written: `docs/lad-v2/emuses-migration.md`. To be executed by
       a **fresh** session in `~/neuro_apps/emuses`, not from here. Blocked on (a) LAD being pushed,
       since `/plugin marketplace add` reads the remote, and (b) the pre-existing EMUSES session
