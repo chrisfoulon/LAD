@@ -1,0 +1,18 @@
+{
+  "name": "lad",
+  "description": "The LAD framework — staged skills for safe, test-driven Python feature development.",
+  "owner": {
+    "name": "Chris Foulon"
+  },
+  "plugins": [
+    {
+      "name": "lad",
+      "source": "./",
+      "description": "LLM-Assisted Development: a staged workflow for building Python features safely — existing-work discovery, TDD planning, checkpointed implementation, and test-suite quality cycles.",
+      "version": "2.0.0",
+      "author": {
+        "name": "Chris Foulon"
+      }
+    }
+  ]
+}

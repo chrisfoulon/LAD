@@ -1,229 +1,140 @@
-# LAD — LLM-Assisted Development Prompt Kit
+# LAD — LLM-Assisted Development
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-LAD enables **systematic feature development** and **enterprise-grade test quality** using Claude Code + GitHub Copilot Agent Mode. Build complex Python features *iteratively* and *safely*—from context gathering to 100% meaningful test success—with zero extra infrastructure.
+A Claude Code plugin for building Python features without the usual failure modes: rebuilding
+something that already exists, starting from an unknown baseline, or reaching a green test suite by
+weakening the tests.
 
-## ✨ What's New in 2025
+LAD is a set of skills, one per stage of the work. Claude loads them when relevant, or you invoke
+them directly with `/lad:<name>`.
 
-🔬 **Enhanced Test Quality Framework** — Achieve 90%+ test success through systematic PDCA cycles  
-🎯 **Industry Standards Compliance** — Research software + Enterprise + IEEE validation  
-📊 **Session Continuity** — Seamless interruption/resumption across multiple sessions  
-⚡ **Real-World Insights** — Based on 50+ LAD implementations in research software  
-
-## Features
-
-✅ **Test-driven development** with atomic task breakdowns  
-✅ **Systematic test improvement** with PDCA methodology  
-✅ **Component-aware testing** (integration for APIs, unit for business logic)  
-✅ **Multi-level documentation** with collapsible sections  
-✅ **NumPy-style docstrings** enforced throughout  
-✅ **Session continuity** with TodoWrite progress tracking  
-✅ **GitHub Flow** with automated PR creation/cleanup  
-✅ **Agent autonomy** with diff approval workflow  
-
-## Choose Your Workflow
-
-LAD supports two autonomous workflows optimized for different development environments:
-
-### 🚀 Claude Code
-**Multi-phase autonomous workflow for command-line development**
+## Install
 
 ```bash
-# Quick Setup (using git subtree)
-git subtree add --prefix .lad https://github.com/chrisfoulon/LAD main --squash
-
-# Feature Development
-git checkout -b feat/my-feature
-# Tell Claude Code: "Use LAD framework to implement [feature description]"
-
-# Update LAD framework (when needed)
-git subtree pull --prefix .lad https://github.com/chrisfoulon/LAD main --squash
+/plugin marketplace add chrisfoulon/LAD
+/plugin install lad@lad
 ```
 
-**Example: Starting a new feature**
-```
-User: Use LAD framework to implement user authentication with JWT tokens
+Update with `/plugin marketplace update lad`.
 
-Claude: I'll use the LAD framework to implement user authentication. Let me start by reading the feature kickoff prompt.
+Nothing is copied into your project — no `.lad/` directory, no subtree to keep in sync. Skills come
+from the installed plugin, so every project gets the same version and updates arrive in one place.
 
-[Claude automatically reads .lad/claude_prompts/00_feature_kickoff.md and begins setup]
-```
-
-### 🛠️ GitHub Copilot Agent Mode (VSCode)
-**Function-based autonomous workflow for IDE development**
-
-**⚠️ Requires Copilot Agent Mode - standard Copilot Chat alone will not work with LAD**
-
-```bash
-# Same LAD import as above (git subtree add)
-git checkout -b feat/my-feature
-# Tell Copilot Agent: "Use LAD framework to implement [feature description]"
-```
-
-**Example: Starting with Copilot Agent**
-```
-User: Use LAD framework to implement user authentication with JWT tokens
-
-Copilot Agent: I'll use the LAD framework for systematic implementation. Let me read the feature kickoff prompt and begin autonomous execution.
-
-[Copilot Agent reads .lad/copilot_prompts/00_feature_kickoff.md and executes]
-```
-
-## Framework Structure
+## The workflow
 
 ```
-.lad/
-├── README.md                                     # This overview
-├── LAD_RECIPE.md                                 # Complete workflow guide
-├── claude_prompts/                               # 🚀 Claude Code workflow
-│   ├── 00_feature_kickoff.md                     # Environment setup
-│   ├── 01_autonomous_context_planning.md         # Context + planning
-│   ├── 01b_plan_review_validation.md             # Optional validation
-│   ├── 02_iterative_implementation.md            # TDD implementation
-│   ├── 03_quality_finalization.md                # Final validation
-│   ├── 04a_test_execution_infrastructure.md      # 🆕 Test execution setup
-│   ├── 04b_test_analysis_framework.md            # 🆕 Pattern recognition
-│   ├── 04c_test_improvement_cycles.md            # 🆕 PDCA methodology
-│   └── 04d_test_session_management.md            # 🆕 Session continuity
-├── copilot_prompts/                              # 🛠️ Copilot Agent workflow
-│   ├── 00_feature_kickoff.md → 06_self_review_with_chatgpt.md
-│   ├── 04a-04d_test_*.md                         # 🆕 Enhanced test quality
-│   └── 04_test_quality_systematic.md             # 🆕 Single-file version
-└── .vscode/                                      # Optional VSCode settings
+/lad:feature-kickoff → /lad:plan-feature → /lad:implement-feature → /lad:finalize-feature
+                                                                          ↓  (after merge)
+                                                                  /lad:consolidate-feature
 ```
 
-## Quick Examples
+| Skill | What it does |
+|---|---|
+| **`feature-kickoff`** | Clarifies the request, searches for work that already does the job, decides integrate/enhance/rebuild, locates the relevant code and docs as concrete references, records a quality baseline |
+| **`plan-feature`** | Test-driven task breakdown, a real critical review of that plan, and a split into sub-plans when it is too large |
+| **`implement-feature`** | The TDD loop, with quality gates, regression checks and periodic approval checkpoints. Resumable across sessions |
+| **`finalize-feature`** | Final validation, delivered-versus-planned check, documentation, commit or PR |
+| **`consolidate-feature`** | After merge: condenses the working files into one durable decision record and prunes the rest |
 
-### Feature Implementation (Phase 2 Continuation)
-After planning is complete, continue implementation:
-
-```
-User: Continue with phase 2 implementation
-
-Claude: I'll continue with the iterative implementation phase. Let me check the current TodoWrite status and proceed with the next pending task.
-
-[Claude reads 02_iterative_implementation.md and resumes from current state]
-```
-
-### Test Quality Improvement
-Achieve systematic test improvement:
+### A feature, start to finish
 
 ```
-User: Use LAD test quality framework to achieve 100% meaningful test success
+git checkout -b feat/export-csv
 
-Claude: I'll use the enhanced test quality framework to systematically improve your test suite. Starting with phase 04a (Test Execution Infrastructure).
+> /lad:feature-kickoff export analysis results to CSV
+    asks what "results" means if it is ambiguous; finds `ResultWriter` at
+    src/io/writers.py:88 already does half of it; recommends Enhance over Build new;
+    records the test baseline. Writes dev-docs/export-csv/context.md
 
-[Claude executes 04a→04b→04c→04d with PDCA cycles and user decision points]
+> /lad:plan-feature
+    six tasks, each naming its test file; flags that no realistic sample of the
+    result structure is available, as a question for you rather than an invented
+    fixture. Writes plan.md
+
+> /lad:implement-feature
+    TDD loop, one task at a time. Stops every 2–3 tasks to show you the diff,
+    test numbers and what is next, and waits
+
+> /lad:finalize-feature
+    full validation, checks delivered against planned, updates the docs the
+    kickoff stage identified, prepares the commit
+
+# ... review, merge ...
+
+> /lad:consolidate-feature export-csv
+    writes dev-docs/decisions/export-csv.md, indexes it, offers to prune the
+    working files
 ```
 
-## Documentation
+You can also just describe what you want — Claude loads the right skill from context. Invoking
+explicitly is for when you want to be sure which stage you are in.
 
-📖 **[LAD_RECIPE.md](LAD_RECIPE.md)** — Complete step-by-step workflow guide  
-🚀 **[Claude Code prompts](claude_prompts/)** — 7-phase autonomous workflow  
-🛠️ **[Copilot Agent prompts](copilot_prompts/)** — Function-based autonomous workflow  
-🔬 **Enhanced Test Quality** — 4-phase systematic improvement framework  
+**Resuming** is the normal case, not the exception. `/lad:implement-feature` reconstructs where it
+is from the task list, the plan file and the actual state of the test suite, and treats the code as
+the tiebreaker when those disagree.
+
+Two more, used on their own:
+
+| Skill | What it does |
+|---|---|
+| **`test-quality`** | Repairs a failing or unreliable suite: real baseline, root-cause classification, prioritised batches of fixes |
+| **`maintenance-session`** | Technical debt triaged by actual impact, not by violation count |
+
+`lad-standards` runs in the background — Claude loads it when writing Python. It holds the project's
+conventions and the guardrail registry.
+
+## What it leaves behind
+
+During a feature: `docs/<slug>/plan.md` and `context.md`. Working state, deliberately thin.
+
+After merge, `consolidate-feature` replaces both with `docs/decisions/<slug>.md` — what was built,
+the choices and why, **the alternatives that were rejected**, deviations from plan, known
+limitations — indexed in `docs/DECISIONS.md`.
+
+That last part matters more than it looks. A future session that cannot see what was already ruled
+out will propose it again, confidently. It is also what lets a `STATUS.md` stay a short statement of
+the current state instead of growing into a changelog.
+
+## The guardrail registry
+
+`skills/lad-standards/references/guardrails.md` lists failure modes actually observed in this work —
+imports moved inside functions to dodge a circular import, tests edited to match broken code, failing
+tests skipped to reach green, fixtures built from invented data.
+
+It is built to be maintained. Entries carry sighting dates and a status; `consolidate-feature`
+prompts you to add new ones while the work is fresh, and there is an explicit retirement process so
+the list does not grow forever. One model improving is not grounds for retirement — retire on
+absence of sightings.
+
+Add to it when you catch a mistake twice, or once with real consequences. That bar is deliberate: a
+registry that grows without pruning stops being read, which is exactly how the previous version of
+this framework reached 8,500 lines.
+
+## Conventions it applies
+
+NumPy docstrings · flake8 with `max-complexity 10` · 90% coverage on new code · Conventional Commits
+· integration tests for APIs, unit tests for logic · three-level documentation (summary → API table →
+walk-through).
+
+Full detail in `skills/lad-standards/SKILL.md`.
 
 ## Requirements
 
-### For Claude Code Workflow
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed
-- Python 3.11+
-- Git repository
-
-### For Copilot Agent Workflow  
-- VS Code with GitHub Copilot Agent Mode enabled
-- Python 3.11+
-- `gh` CLI for PR management (optional)
-
-## Code Quality Setup
-
-LAD uses several tools to maintain code quality. Install them once per project:
+Claude Code, Python 3.11+, a git repository. For the quality gates:
 
 ```bash
-pip install flake8 pytest coverage radon flake8-radon black
+pip install flake8 pytest coverage
 ```
 
-Both LAD workflows will guide you through creating `.flake8` and `.coveragerc` configuration files during the kickoff process.
+## Extending it
 
-## Workflow Characteristics
-
-Both LAD workflows provide autonomous development with the same quality outcomes. Choose based on your development environment and preferences:
-
-### Claude Code Workflow
-- **Environment**: Command-line development with autonomous tool access
-- **Interaction**: Conversational with autonomous file operations
-- **Context Management**: Built-in tools for codebase exploration
-- **Progress Tracking**: TodoWrite integration with cross-session persistence
-
-### Copilot Agent Mode Workflow  
-- **Environment**: VS Code IDE integration with agent capabilities
-- **Interaction**: Function-based development with structured prompts
-- **Context Management**: IDE file context with autonomous execution
-- **Progress Tracking**: Structured state management within development environment
-
-**Both workflows achieve the same outcomes** — systematic feature development, comprehensive testing, and enterprise-grade quality — through different interaction models optimized for their respective environments.
-
-## Claude Code Workflow Phases
-
-### Core Development (Phases 0-3)
-| Phase | Duration | Capabilities |
-|-------|----------|--------------|
-| **0. Feature Kickoff** | ~5-10 min | Environment setup, quality standards, baseline metrics |
-| **1. Context & Planning** | ~10-15 min | Autonomous exploration, TodoWrite breakdown, sub-plan evaluation |
-| **1b. Plan Review (Optional)** | ~5-10 min | Cross-validation, quality assurance |
-| **2. Implementation (Resumable)** | ~30-120 min | TDD loop, continuous testing, cross-session resumability |
-| **3. Finalization** | ~5-10 min | Self-review, documentation, conventional commits |
-
-### 🆕 Enhanced Test Quality (Phases 4a-4d)
-| Phase | Duration | Capabilities |
-|-------|----------|--------------|
-| **4a. Test Execution** | ~10-15 min | Systematic chunking, timeout prevention, baseline establishment |
-| **4b. Test Analysis** | ~15-20 min | Holistic pattern recognition, industry standards validation |
-| **4c. Improvement Cycles** | ~30-60 min | PDCA cycles, TodoWrite integration, systematic fixes |
-| **4d. Session Management** | ~5-10 min | Session continuity, context optimization, decision framework |
-
-## Real-World Usage Patterns
-
-**Based on 50+ LAD implementations:**
-
-### Session Management
-- **Marathon Sessions (2-4 hours)**: Complex features with Phase 2 resumability
-- **Focus Sessions (30-60 min)**: Test improvement cycles with PDCA methodology  
-- **Context Sessions (10-15 min)**: Session restoration and planning
-
-### TodoWrite Best Practices
-- Mark **ONE task as in_progress** before starting work
-- Complete tasks **IMMEDIATELY** after finishing
-- Break complex tasks into **smaller, actionable items**
-- Use **descriptive task names** for progress clarity
-
-### Test Quality Success Patterns
-- Start with **P1-CRITICAL fixes** (scientific validity + high impact/low effort)
-- **Batch compatible fixes** (infrastructure, API, test design changes)
-- **Validate after each cycle** (regression prevention essential)
-- User decision patterns: Most choose **A (continue)** after seeing progress
-
-## Context Optimization
-
-**Proven strategies for long sessions:**
-- Use **`/compact <description>`** after major phase completions
-- **Archive resolved issues** before hitting context limits  
-- **Preserve successful patterns** in CLAUDE.md
-- **Session state files** enable seamless resumption
+Skills are plain Markdown with YAML frontmatter, following the
+[Agent Skills](https://agentskills.io) open standard. Edit them, add your own under `skills/`, or
+fork the repo for project-specific variants. Keep each `SKILL.md` under ~500 lines and push detail
+into `references/` — content loads only when the skill is used, so reference files cost nothing
+until needed.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE.md).
-
-## Contributing
-
-Improvements welcome! The LAD framework evolves based on real-world usage patterns and community feedback.
-
-**Framework Evolution Metrics:**
-- Autonomous development workflows in both Claude Code and Copilot Agent Mode
-- 90%+ test success rates through systematic improvement methodology
-- Seamless session resumption across interruptions and context switches
-- Enterprise-grade quality standards with research software optimization
-
-See [LAD_RECIPE.md](LAD_RECIPE.md) for complete framework details and contribution guidelines.
+[MIT](LICENSE.md).
