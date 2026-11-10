@@ -76,20 +76,23 @@ explicitly is for when you want to be sure which stage you are in.
 is from the task list, the plan file and the actual state of the test suite, and treats the code as
 the tiebreaker when those disagree.
 
-Two more, used on their own:
+More, used on their own:
 
 | Skill | What it does |
 |---|---|
 | **`test-quality`** | Repairs a failing or unreliable suite: real baseline, root-cause classification, prioritised batches of fixes |
 | **`maintenance-session`** | Technical debt triaged by actual impact, not by violation count |
 | **`converge`** | Whole-codebase drift check: does the code still match what the decision records, ADRs and docs claim? Reports, does not fix |
+| **`audit-structure`** | Read-only structural audit of one area: hidden links, needless links, surplus and special cases, grouped under the few fixes behind them, in a decision log. Changes no code; each accepted fix becomes its own feature. Adapted from `untangle-codebase` (MIT) |
 
 `lad-standards` runs in the background — Claude loads it when writing Python. It holds the project's
 conventions and the guardrail registry.
 
 ## What it leaves behind
 
-During a feature: `docs/<slug>/plan.md` and `context.md`. Working state, deliberately thin.
+During a feature: `docs/<slug>/plan.md` and `context.md`. Working state, deliberately thin. In a
+project that uses calcombre, they follow its page rules instead
+(`skills/lad-standards/references/calcombre.md`).
 
 After merge, `consolidate-feature` replaces both with `docs/decisions/<slug>.md` — what was built,
 the choices and why, **the alternatives that were rejected**, deviations from plan, known
