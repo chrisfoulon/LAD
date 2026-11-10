@@ -66,6 +66,10 @@ Use what fits the area's size (`lad-standards`, "When the code graph is worth it
   The log is not limited to the area on purpose: a partner outside it is a boundary link, the kind
   most likely to be hidden. Commits touching more than ~15 files are left out: they are sweeps (formatting, renames), not
   evidence of a link. Also note how often each file changes: a file that changes often is volatile.
+- **Shared-state keys.** Where components pass a dict, a context or a settings object between
+  them, list per file which keys it reads and which it writes (a grep for the subscript and `.get`
+  forms). A key read and never written is a hidden link, and often a live bug: the reader gets its
+  default every time, silently.
 - **Subagent summaries**, for an area too large to read: have read-only agents summarise parts of it
   (what each module is for, what it reads from and writes to outside itself), then reason across
   the summaries.
@@ -144,6 +148,10 @@ date: <YYYY-MM-DD>
 
 _<commit audited> · <N files, M lines> · read-only; no code was changed_
 
+## Found on the way: likely bugs
+<each with `path:line`, why it looks wrong, and how to confirm it; "none" is a valid answer. A bug
+is reported here and fixed as its own feature, never folded into a structural fix>
+
 ## Evidence used
 <skeleton, graph (index date), co-change window, subagents; what was not available>
 
@@ -168,8 +176,8 @@ Do not sort problems by kind in the log; the kinds are for finding them. The log
 
 ## Report
 
-Give the path to the log, the number of fixes and problems, the top three fixes in one line each,
-and whether reference outputs exist. Then stop. Each fix the user accepts is its own feature,
+Give the path to the log, any likely bugs first, the number of fixes and problems, the top three
+fixes in one line each, and whether reference outputs exist. Then stop. Each fix the user accepts is its own feature,
 started with `/lad:feature-kickoff` in a worktree, with the log entry as its request. Do not begin
 any of them here.
 

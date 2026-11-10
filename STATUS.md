@@ -1,5 +1,5 @@
 # STATUS — LAD (LLM-Assisted-Development Framework)
-_Last touched: 2026-07-30_
+_Last touched: 2026-11-10_
 
 ## Goal
 Keep LAD useful as a personal development framework: a small set of skills that prevent the failure
@@ -10,10 +10,24 @@ modes that actually recur, without accumulating content nobody reads.
 (PR #5 merged). `/plugin marketplace add chrisfoulon/LAD` → `/plugin install lad@lad` verified
 working end to end. `8552 lines → ~1150`.
 
-Nine skills: `lad-standards` (model-invoked background), then the feature pipeline —
+**v2.2.0 (2026-11-10)**, from a calcombre brief (`docs/CALCOMBRE_PROMPT_2026-11-09.md`, untracked:
+it holds private paths):
+- `lad-standards` has one rule for when the code graph is worth it (indexed, and structural or too
+  big to read; ~50 files / 10k lines is a guess to revise). `maintenance-session` gained an impact
+  step using it; kickoff and converge point to it.
+- `references/calcombre.md`: in a project with `STATUS.md` + `WORKLOG.md` + a page folder, working
+  files are pages, the feature is a WORKLOG task whose boxes are LAD stages, questions are decision
+  blocks, finished work goes on `done.md`. Detected, never set up. Templates have `title:` front
+  matter everywhere.
+- New `audit-structure`: read-only audit of one area, adapted from `untangle-codebase` (MIT, notice
+  in the skill folder). First trial on EMUSES `emuses/pipelines`: log at EMUSES
+  `dev-docs/audit-pipelines.md` (uncommitted there). It found a likely bug: the heatmap stage reads a
+  `scores_scaler` key nothing writes, so the prediction grids probably stay normalised.
+
+Ten skills: `lad-standards` (model-invoked background), then the feature pipeline —
 `feature-kickoff` → `plan-feature` → `implement-feature` → `finalize-feature` →
-`consolidate-feature` (post-merge) — plus `test-quality`, `maintenance-session` and `converge`
-standalone. A `SessionStart` hook announces them; the list is discovered from the skills directory
+`consolidate-feature` (post-merge) — plus `test-quality`, `maintenance-session`, `converge` and
+`audit-structure` standalone. A `SessionStart` hook announces them; the list is discovered from the skills directory
 (pipeline order is the only thing it hardcodes), so it cannot drift. Keep it that way.
 
 **Competitive position, researched 2026-07-30.** LAD's first commit (2025-06-11) predates GitHub
@@ -48,6 +62,15 @@ Note: `/reload-plugins` reports `0 skills` for this plugin. Cosmetic — that co
   "model cost optimisation" analysis and the unciteable "industry standard" pass rates.
 
 ## Open questions / next
+- [ ] **Prune or keep working files in a calcombre project**: decision block in
+      `docs/CALCOMBRE_PROMPT_2026-11-09.md` (recommended: keep, marked finished). Until decided,
+      `consolidate-feature` asks in an approve box and keeps them. Apply the answer to
+      `references/calcombre.md` "Pruning" and `consolidate-feature`.
+- [ ] Chris judges the EMUSES pipelines audit log. The likely `scores_scaler` bug, if confirmed by
+      one run, goes to an EMUSES session as its own feature; it will move the regression baselines.
+- [ ] codebase-memory Cypher queries on EMUSES returned nothing for `file_path`/`qualified_name`
+      filters while `trace_path` and `search_graph` worked. Not investigated; check the graph schema
+      before the next audit.
 - [ ] **EMUSES migration is mid-flight**, run from a session in `~/neuro_apps/emuses` against
       `docs/lad-v2/emuses-migration.md`. Rescue step done: four EMUSES work-product files
       (1226 lines) moved out of `.lad/` into `dev-docs/project-history/phase-implementations/` with
