@@ -79,6 +79,26 @@ drifts out of date and then misleads more confidently than having none, because 
 authoritative. Where a code-graph tool indexes the project, prefer querying it for structure and
 keep the written docs to the reasoning a graph cannot hold.
 
+## When the code graph is worth it
+
+A code-graph tool (for example `codebase-memory-mcp`) answers structural questions directly: who
+calls this, what breaks if it changes, what nothing uses. Whether it beats grep and reading depends
+on the question and the size of the code, so the rule is neither "always" nor "never":
+
+- **Use the graph** when the project is indexed and either the question is structural across many
+  files, or the code is too large to read for it. A starting threshold, a guess to revise with use
+  and not a measured figure: about 50 source files or 10k lines.
+- **Read directly** below that, or when the question is about one or two files. Grep and reading
+  answer it as well, without an index to build and keep fresh.
+- **Check it is fresh.** An index built before a large change reports deleted symbols with full
+  confidence. Re-index, or fall back to grep and reading.
+- **Know its blind spots.** Dynamic dispatch, `getattr`, plugin registries and string-built imports
+  do not show up as edges. Confirm "nothing uses this" with a grep for the name before calling code
+  dead.
+
+Check whether the project is indexed before assuming either way. If it is not and it is past the
+threshold, indexing it once may be worth it; do not block on it.
+
 ## Commits
 
 Conventional Commits: `feat(scope): description`, `fix(scope): ...`, `refactor(scope): ...`.

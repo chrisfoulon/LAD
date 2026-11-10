@@ -47,16 +47,14 @@ now**, before step 2. See the template in step 6; fill in the Request section an
 
 ## 2. Find what already exists — as resolvable references
 
-**If the project is indexed in a code-graph tool** (for example `codebase-memory-mcp`), use it
-first. It gives qualified names, call chains and dependents directly, which is exactly what the next
-stage needs and what grep only approximates:
+**If the project is indexed in a code-graph tool** (for example `codebase-memory-mcp`) and is large
+enough to need it (`lad-standards`, "When the code graph is worth it"), use it first. It gives
+qualified names, call chains and dependents directly, which is exactly what the next stage needs and
+what grep only approximates:
 
 - search for symbols matching the feature's vocabulary
 - trace callers and callees of anything that looks like an existing implementation
 - pull the architecture overview for the subsystem you are touching
-
-Check whether the project is indexed before assuming either way; if it is not, indexing it may be
-worth doing once, but do not block on it.
 
 **Otherwise, or to fill gaps**, use Grep/Glob over: the feature's keywords plus the domain
 vocabulary the codebase actually uses (which is often not the vocabulary in the request), existing

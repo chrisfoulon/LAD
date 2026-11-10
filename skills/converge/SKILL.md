@@ -34,9 +34,10 @@ the useful output is "start recording decisions", not a fabricated audit.
 ## 2. Check each claim against the code
 
 For each substantive claim, verify rather than assume. A code-graph tool is the right instrument
-here if the project has one — but **check it is not stale first**. A graph indexed before a large
-refactor reports deleted symbols with total confidence, which is worse than no graph. Re-index, or
-fall back to Grep and Read.
+here if the project has one and is large enough to need it (`lad-standards`, "When the code graph
+is worth it") — but **check it is not stale first**. A graph indexed before a large refactor reports
+deleted symbols with total confidence, which is worse than no graph. Re-index, or fall back to Grep
+and Read. Orphans in particular are a graph query (dead code), confirmed by a grep for the name.
 
 Look for:
 

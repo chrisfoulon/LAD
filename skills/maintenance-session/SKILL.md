@@ -29,7 +29,23 @@ lines while it sits there is motion, not progress.
 Read `MAINTENANCE_REGISTRY.md` if the project keeps one — earlier sessions may already have
 triaged and deferred things, with reasons worth respecting.
 
-## 2. Work file by file
+## 2. Know the impact before changing anything
+
+**If the project is indexed in a code-graph tool** (for example `codebase-memory-mcp`) and is large
+enough to need it (`lad-standards`, "When the code graph is worth it"), use it first. It gives the
+impact of a change directly, which grep only approximates:
+
+- trace the callers of anything you are about to change, so you know what a fix can break
+- list dead code in the area: a function nothing calls is removed or deferred, not cleaned up
+- look at fan-out: a function calling many others is where a small change spreads furthest
+
+**Otherwise, or to fill gaps**, grep for the name across the repository, tests included.
+
+The graph misses dynamic dispatch, `getattr`, plugin registries and string-built imports. Before
+removing anything as dead, grep for its name; a hit in a registry or a config file means it is
+live.
+
+## 3. Work file by file
 
 Complete one file before moving on. Batching by file rather than by violation type keeps each change
 reviewable and each test run meaningful.
@@ -54,7 +70,7 @@ a test first or leave the file alone and record it.
 Commit in logical groups (`fix: address bare excepts in <area>`), not one enormous sweep. If
 something breaks, small commits make it obvious which change did it.
 
-## 3. Know when to stop
+## 4. Know when to stop
 
 Check in when the picture changes:
 
@@ -64,7 +80,7 @@ Check in when the picture changes:
   cleanup commit where nobody will notice it
 - A change touches a critical path with thin test coverage
 
-## 4. Record what you did not do
+## 5. Record what you did not do
 
 Anything deliberately deferred goes in `MAINTENANCE_REGISTRY.md` with the reason:
 
