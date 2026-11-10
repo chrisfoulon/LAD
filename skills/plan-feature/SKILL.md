@@ -43,7 +43,13 @@ Mark tasks needing a decision from the user with `[USER_INPUT]` and say what the
 
 Register the tasks with `TaskCreate` so progress survives across sessions, and write the same
 breakdown to `<docs>/<slug>/plan.md` — the file is what you check off and read later; the task list is
-what keeps the current session honest.
+what keeps the current session honest. Give it front matter (`title: "Plan — <slug>"`), as
+`context.md` has.
+
+**If the project uses calcombre** (`lad-standards`, "Where working files go"), each `[USER_INPUT]`
+that needs more than a yes or no is also a decision block in `plan.md`, next to its task: the
+options, your recommendation and why. Once answered, turn it into a `.decided` block with the answer
+written in. Tick the plan box of the feature's task in `WORKLOG.md`.
 
 ## 2. Review the plan critically
 

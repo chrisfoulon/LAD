@@ -77,6 +77,10 @@ Write `<docs>/decisions/<slug>.md`. Aim for one page. If it runs much longer, it
 that belongs in the code.
 
 ```markdown
+---
+title: "<slug>"
+---
+
 # <slug>
 
 _Merged YYYY-MM-DD · <commit range or PR number>_
@@ -139,6 +143,18 @@ deletion is not yours to assume. If in doubt, leave them.
 
 Also update `STATUS.md` if the project keeps one: the feature moves from in-progress to done, and
 anything it settled should supersede the older lines rather than being appended below them.
+
+## In a calcombre project
+
+If the project uses calcombre (`lad-standards`, "Where working files go"), three things differ:
+
+- **The record is added to, never rewritten.** Earlier entries in the ADR or decision records keep
+  their text; a decision this feature reversed gets a new dated entry that says so.
+- **Finished work goes on the done page.** Add one or two dated lines to `done.md` in the page folder
+  (create it with a `title:` if missing), pointing to the record, and move the feature's task out of
+  `WORKLOG.md` once its last box is ticked. `STATUS.md` changes only if a milestone did.
+- **Do not delete the working files.** Propose pruning in an approve block on the record's page and
+  leave them in place unless it is approved (`references/calcombre.md`, "Pruning").
 
 ## Report
 

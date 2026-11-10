@@ -89,5 +89,8 @@ State plainly: what was built, quality numbers, anything deferred or dropped, an
 If something is incomplete, say it here — a finalization report that claims completeness while the
 diff disagrees is worse than no report.
 
+In a calcombre project (`lad-standards`, "Where working files go"), tick the finalize box of the
+feature's task in `WORKLOG.md`.
+
 After the feature is merged, run `/lad:consolidate-feature` to condense the working files into a
 durable record.

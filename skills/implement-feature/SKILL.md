@@ -55,7 +55,9 @@ NumPy docstrings on new public functions and classes as you go, not afterwards.
 
 If you hit a genuine technical fork — architecture, error-handling philosophy, sync vs async, an
 interface that will be hard to change later — stop and put it to the user with the options, the
-trade-offs, and your recommendation. Use `AskUserQuestion` when the options are discrete.
+trade-offs, and your recommendation. Use `AskUserQuestion` when the options are discrete. In a
+calcombre project (`lad-standards`, "Where working files go"), a fork that needs more than a quick
+choice goes in `plan.md` as a decision block instead, so the answer stays with the plan.
 
 ### 3. Validate
 
@@ -122,4 +124,5 @@ suite.
 ## Done
 
 When every task is complete, the suite is green and quality gates pass, hand off to
-`/lad:finalize-feature`.
+`/lad:finalize-feature`. In a calcombre project, tick the implement box of the feature's task in
+`WORKLOG.md` first.

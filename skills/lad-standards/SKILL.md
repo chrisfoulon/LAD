@@ -65,6 +65,15 @@ projects, follow [`references/mkdocs-material.md`](references/mkdocs-material.md
 formatting rules that silently break rendering (blank lines after headers, table formatting,
 progressive-disclosure syntax).
 
+### Where working files go
+
+LAD's working files (`context.md`, `plan.md`) follow the project's development-docs convention.
+**If the project uses calcombre** (a root `STATUS.md` and `WORKLOG.md`, plus a page folder with
+`_pages.yml`, or `docs/` with `_quarto.yml`), follow
+[`references/calcombre.md`](references/calcombre.md): the working files become pages in the page
+folder, open work goes in `WORKLOG.md`, and questions for the user become decision blocks. Detect it;
+never set it up.
+
 ### User-facing docs and developer docs are separate trees
 
 Where a project separates them (`docs/` published to users, `dev-docs/` for contributors and

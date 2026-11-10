@@ -124,12 +124,21 @@ side effect of starting a feature unless asked.
 `dev-docs/`, `doc/`, `notes/`. Check before creating anything, and follow what is there; only fall
 back to `docs/<slug>/` when the project has no convention. Below, `<docs>` means whichever applies.
 
+**If the project uses calcombre** (`lad-standards`, "Where working files go"), `<docs>` is its page
+folder, and the feature also gets its task in `WORKLOG.md`: headed with the slug and today's date,
+one box per LAD stage still to run (plan, implement, finalize, consolidate), and a pointer to
+`<docs>/<slug>/plan.md`. Tick the kickoff box now.
+
 The Request section was written in step 1. Fill in the rest now — and if anything in discovery
 changed the Request, flag the change rather than editing it silently.
 
 `<docs>/<slug>/context.md`:
 
 ```markdown
+---
+title: "Context — <slug>"
+---
+
 # Context — <slug>
 
 ## Request
@@ -160,8 +169,8 @@ changed the Request, flag the change rather than editing it silently.
 Tests: <N passing, M failing (pre-existing)> · flake8: <N violations> · Branch: <name>
 ```
 
-Keep it to what the next stage needs. This file is working state, not a deliverable — it gets
-condensed into `docs/decisions/<slug>.md` at the end and pruned.
+Keep it to what the next stage needs. This file is working state, not a deliverable — its decisions
+are condensed into the project's decision record at the end (`/lad:consolidate-feature`).
 
 ## Next
 
