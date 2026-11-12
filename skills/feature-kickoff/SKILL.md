@@ -127,7 +127,9 @@ back to `docs/<slug>/` when the project has no convention. Below, `<docs>` means
 **If the project uses calcombre** (`lad-standards`, "Where working files go"), `<docs>` is its page
 folder, and the feature also gets its task in `WORKLOG.md`: headed with the slug and today's date,
 one box per LAD stage still to run (plan, implement, finalize, consolidate), and a pointer to
-`<docs>/<slug>/plan.md`. Tick the kickoff box now.
+`<docs>/<slug>/plan.md`. Tick the kickoff box now. **If `WORKLOG.md` already has a task for this
+work** (the user often opens it before LAD runs), do not open a second one: add the LAD stage
+boxes and the pointer to that task, and leave its own boxes as they are.
 
 The Request section was written in step 1. Fill in the rest now — and if anything in discovery
 changed the Request, flag the change rather than editing it silently.
