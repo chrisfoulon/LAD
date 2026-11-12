@@ -122,17 +122,31 @@ covered", with why.
 For each fix, also state:
 
 - **What it touches**: the files, and roughly how many callers (from the graph or grep).
-- **Whether it touches a path that produces scientific or numerical output** (an analysis result, a
-  statistic, a model output, a saved figure's data). If it does, tests are not enough to accept it:
-  it needs a comparison of outputs before and after, against reference outputs. Say how this
-  project's reference outputs are found (a regression gate, stored expected results, a golden-file
-  test, a documented reference run), or say plainly that there are none. Look for them; do not
-  assume either way.
+- **Whether it touches a numerical path**: code whose change can change a number the work reports
+  or rests on (an analysis result, a statistic, a model output, a saved figure's data). If it does,
+  tests are not enough to accept it: it needs a comparison of outputs before and after, against
+  reference outputs. Say how this project's reference outputs are found (a regression gate, stored
+  expected results, a golden-file test, a documented reference run), or say plainly that there are
+  none. Look for them; do not assume either way. Then say **what they can and cannot see**: read
+  the project's notes on them (its `STATUS.md`, the gate's README). A baseline known to be blind to
+  a path does not check a fix on that path; say so, and say what check the fix needs instead.
 - **Risk**: what goes wrong if the fix is wrong, and whether it is visible when it does.
 
 Rank the fixes: most problems resolved for least risk first.
 
-## 4. Write the decision log
+## 4. Have it checked by a pass that did not write it
+
+The author of a log is the worst judge of it. Before handing it over, have a fresh read-only agent
+try to **refute** it, item by item: open every `path:line`, look for the writer of a key you say
+nothing writes, and for each fix ask what contract it would break (public API, CLI, service
+endpoints, files written to disk that other code reads back, tests that pin behaviour, modes of
+running the code). Give it the swallowed-exception and special-case lists you did not finish, too.
+
+Put its verdicts in the log as their own section (confirmed, refuted, unsure, with the evidence),
+and correct the entries it refutes rather than deleting them: strike the claim and say why. A log
+that has survived a refutation pass is worth acting on; one that has not is a hypothesis.
+
+## 5. Write the decision log
 
 One file, in the project's development-docs convention: `<docs>/audit-<area-slug>.md`. In a
 calcombre project (`lad-standards`, "Where working files go"), that is the page folder, and the
@@ -155,9 +169,15 @@ is reported here and fixed as its own feature, never folded into a structural fi
 ## Evidence used
 <skeleton, graph (index date), co-change window, subagents; what was not available>
 
+**"Numerical path", as used below:** <one or two sentences: code whose change can change a reported
+number; fixes on it need an output comparison, not only tests>
+
 ## Reference outputs
 <how this project's outputs are compared before and after a change, or "none found", with where
-you looked>
+you looked; then what they can and cannot see>
+
+## Verification
+<the refutation pass's verdict per item: confirmed / refuted / unsure, with evidence>
 
 ## Fixes
 - **<fix, one sentence: what changes and why it removes the problems below>**
