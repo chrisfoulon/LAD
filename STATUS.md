@@ -66,9 +66,10 @@ Note: `/reload-plugins` reports `0 skills` for this plugin. Cosmetic — that co
 
 ## Open questions / next
 - [ ] EMUSES pipelines audit: reviewed 2026-11-12, all three fixes agreed (order on the
-      log page). A read-only refutation pass is running; its verdicts go on the log before any fix
-      starts. The likely `scores_scaler` bug is EMUSES `STATUS.md` item 000; the `target_0_*`
-      baselines cannot see it, so its fix brings its own check. `emuses/tools` is the next audit.
+      log page). The refutation pass ran: bug confirmed but only for `--scores_normalization` runs,
+      and 4 of my claims refuted (struck on the page), which is why the pass is now a skill step.
+      It also found 22 silent `except Exception` blocks: decision block on the log page. The bug
+      is EMUSES `STATUS.md` item 000. `emuses/tools` is the next audit.
 - [ ] codebase-memory Cypher queries on EMUSES returned nothing for `file_path`/`qualified_name`
       filters while `trace_path` and `search_graph` worked. Not investigated; check the graph schema
       before the next audit.
