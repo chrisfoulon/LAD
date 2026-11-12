@@ -28,14 +28,14 @@ user's decision.
 
 | LAD file or habit | In a calcombre project |
 |---|---|
-| `<docs>/<slug>/context.md`, `plan.md`, sub-plans | Pages in the page folder. Markdown with a `title:` in YAML front matter (LAD's templates already have one). |
+| `<docs>/<slug>/context.md`, `plan.md`, sub-plans | Pages in the page folder. Markdown with YAML front matter: `title:` (LAD's templates already have one) and `status: current`, which calcombre's page checker requires. |
 | The feature as open work | One task in `WORKLOG.md`, headed with the feature and the date it was opened, its boxes the LAD stages still to run, and a pointer to `plan.md`. The plan's own boxes stay in `plan.md`; they are not copied. The task stays whole until every box is ticked, then leaves for the done page. |
 | `STATUS.md` | Milestones and where things stand only, with pointers. No task checklists in it. |
 | A question for the user that needs more than yes or no (`[USER_INPUT]`, a technical fork) | A decision block on the page it belongs to, usually `plan.md`. The options, your recommendation, and why. |
 | A settled question | The block's opening line becomes `.decided`, folded, with the answer written in. The options stay visible. |
 | Anything that deletes, or that the user alone can validate | An approve block. Act only once the user has approved it in calcombre; a general "ok" or a comment does not count. |
 | Finished work | One or two dated lines on the done page (`done.md` in the page folder; create it with a `title:` if missing), pointing to the record rather than restating it. |
-| Pruning working files after a merge | Not yet decided; see "Pruning" below. |
+| Pruning working files after a merge | They are kept and marked superseded by the record; see "Pruning" below. |
 
 The blocks are Pandoc fenced divs. Quarto renders them as callouts; any other Markdown viewer shows
 the text plainly, so they cost nothing outside calcombre:
@@ -67,10 +67,19 @@ the text plainly, so they cost nothing outside calcombre:
 
 ## Pruning
 
-`consolidate-feature` prunes `context.md` and `plan.md` once their decisions are in the record.
-That conflicts with "nothing is just deleted". Until the project owner settles it, in a calcombre
-project do not delete them: propose it in an approve block, and leave them in place if it is not
-approved.
+In a calcombre project, `consolidate-feature` does not delete the working files (decided
+2026-11-12). It keeps them where they are, so links into them and their comments still work, and
+marks them finished:
+
+- **The record is a page in the page folder** (a decision record, or an ADR page there): set
+  `status: superseded` and `superseded_by: <the record's path, relative to the page folder>` in each
+  working file's front matter. calcombre checks that the target exists and treats the file as
+  retired.
+- **The record is outside the page folder** (an ADR file such as `.codebase-memory/adr.md`):
+  `superseded_by` cannot point there, so keep `status: current` and make the first line under the
+  title `**Finished <YYYY-MM-DD>.** Its decisions are recorded in <path>.`
+- Either way, repoint `STATUS.md` and `WORKLOG.md` to the record rather than the plan: calcombre
+  flags a watched file that names a superseded page.
 
 ## Without calcombre
 

@@ -45,6 +45,9 @@ Note: `/reload-plugins` reports `0 skills` for this plugin. Cosmetic — that co
 `commands/` directories and LAD uses `skills/`. Not a failure.
 
 ## Decided strategy
+- **In a calcombre project, working files are kept, not pruned** (decided 2026-11-12, option A):
+  marked `status: superseded` with `superseded_by` the record, or a "Finished" line when the record
+  is outside the page folder. Prune-after-asking stays the rule elsewhere.
 - **Claude Code only.** Copilot support dropped; cross-tool compatibility comes free from the
   Agent Skills standard rather than being designed for and maintained as a second copy.
 - **Plugin, not subtree.** Consuming projects no longer carry a `.lad/` copy. Versioned installs,
@@ -62,12 +65,10 @@ Note: `/reload-plugins` reports `0 skills` for this plugin. Cosmetic — that co
   "model cost optimisation" analysis and the unciteable "industry standard" pass rates.
 
 ## Open questions / next
-- [ ] **Prune or keep working files in a calcombre project**: decision block in
-      `docs/CALCOMBRE_PROMPT_2026-11-09.md` (recommended: keep, marked finished). Until decided,
-      `consolidate-feature` asks in an approve box and keeps them. Apply the answer to
-      `references/calcombre.md` "Pruning" and `consolidate-feature`.
-- [ ] Chris judges the EMUSES pipelines audit log. The likely `scores_scaler` bug, if confirmed by
-      one run, goes to an EMUSES session as its own feature; it will move the regression baselines.
+- [ ] EMUSES pipelines audit: reviewed 2026-11-12, all three fixes agreed (order on the
+      log page). A read-only refutation pass is running; its verdicts go on the log before any fix
+      starts. The likely `scores_scaler` bug is EMUSES `STATUS.md` item 000; the `target_0_*`
+      baselines cannot see it, so its fix brings its own check. `emuses/tools` is the next audit.
 - [ ] codebase-memory Cypher queries on EMUSES returned nothing for `file_path`/`qualified_name`
       filters while `trace_path` and `search_graph` worked. Not investigated; check the graph schema
       before the next audit.

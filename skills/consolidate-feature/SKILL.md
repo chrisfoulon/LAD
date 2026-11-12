@@ -153,8 +153,10 @@ If the project uses calcombre (`lad-standards`, "Where working files go"), three
 - **Finished work goes on the done page.** Add one or two dated lines to `done.md` in the page folder
   (create it with a `title:` if missing), pointing to the record, and move the feature's task out of
   `WORKLOG.md` once its last box is ticked. `STATUS.md` changes only if a milestone did.
-- **Do not delete the working files.** Propose pruning in an approve block on the record's page and
-  leave them in place unless it is approved (`references/calcombre.md`, "Pruning").
+- **Do not delete the working files: mark them finished instead.** Step 5 is replaced by this.
+  `status: superseded` with `superseded_by` pointing to the record when the record is a page; else a
+  "Finished" first line naming where the record is. Details in `references/calcombre.md`,
+  "Pruning".
 
 ## Report
 
