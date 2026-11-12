@@ -146,6 +146,10 @@ Put its verdicts in the log as their own section (confirmed, refuted, unsure, wi
 and correct the entries it refutes rather than deleting them: strike the claim and say why. A log
 that has survived a refutation pass is worth acting on; one that has not is a hypothesis.
 
+The pass can be wrong too. Re-open the cited lines yourself for every verdict that changes a bug, a
+fix or a decision (each refutation, each "missed" item), and say in the log which ones you
+re-checked. Checking one or two and trusting the rest makes the second reader the authority.
+
 ## 5. Write the decision log
 
 One file, in the project's development-docs convention: `<docs>/audit-<area-slug>.md`. In a
