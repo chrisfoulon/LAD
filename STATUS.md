@@ -1,5 +1,5 @@
 # STATUS — LAD (LLM-Assisted-Development Framework)
-_Last touched: 2026-11-10_
+_Last touched: 2026-11-12_
 
 ## Goal
 Keep LAD useful as a personal development framework: a small set of skills that prevent the failure
@@ -68,8 +68,11 @@ Note: `/reload-plugins` reports `0 skills` for this plugin. Cosmetic — that co
 - [ ] EMUSES pipelines audit: reviewed 2026-11-12, all three fixes agreed (order on the
       log page). The refutation pass ran: bug confirmed but only for `--scores_normalization` runs,
       and 4 of my claims refuted (struck on the page), which is why the pass is now a skill step.
-      It also found 22 silent `except Exception` blocks: decision block on the log page. The bug
-      is EMUSES `STATUS.md` item 000. `emuses/tools` is the next audit.
+      It also found 22 silent `except Exception` blocks; the decision was to make the scientific ones
+      stop the run (EMUSES `STATUS.md` item 000b, after the bug, item 000). Step 4 now also makes
+      the main session re-check every decision-driving verdict of the pass. A Sonnet trial of the
+      skill was deferred (decided C: not needed until audit cost matters; the pipelines log is the
+      reference if it is ever run). `emuses/tools` is the next audit.
 - [ ] codebase-memory Cypher queries on EMUSES returned nothing for `file_path`/`qualified_name`
       filters while `trace_path` and `search_graph` worked. Not investigated; check the graph schema
       before the next audit.
