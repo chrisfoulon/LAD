@@ -125,4 +125,4 @@ suite.
 
 When every task is complete, the suite is green and quality gates pass, hand off to
 `/lad:finalize-feature`. In a calcombre project, tick the implement box of the feature's task in
-`WORKLOG.md` first.
+`WORKLOG.md` first, and commit it with the updated `context.md`.

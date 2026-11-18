@@ -129,7 +129,9 @@ folder, and the feature also gets its task in `WORKLOG.md`: headed with the slug
 one box per LAD stage still to run (plan, implement, finalize, consolidate), and a pointer to
 `<docs>/<slug>/plan.md`. Tick the kickoff box now. **If `WORKLOG.md` already has a task for this
 work** (the user often opens it before LAD runs), do not open a second one: add the LAD stage
-boxes and the pointer to that task, and leave its own boxes as they are.
+boxes and the pointer to that task, and leave its own boxes as they are. When the context file is
+written, commit it with the `WORKLOG.md` change (every stage does this in a calcombre project:
+calcombre reviews only committed pages).
 
 The Request section was written in step 1. Fill in the rest now — and if anything in discovery
 changed the Request, flag the change rather than editing it silently.

@@ -30,6 +30,7 @@ user's decision.
 |---|---|
 | `<docs>/<slug>/context.md`, `plan.md`, sub-plans | Pages in the page folder. Markdown with YAML front matter: `title:` (LAD's templates already have one) and `status: current`, which calcombre's page checker requires. |
 | The feature as open work | One task in `WORKLOG.md`, headed with the feature and the date it was opened, its boxes the LAD stages still to run, and a pointer to `plan.md`. The plan's own boxes stay in `plan.md`; they are not copied. The task stays whole until every box is ticked, then leaves for the done page. If a task for the work already exists, LAD adds its boxes to that task rather than opening another. |
+| Ending a stage | Commit what the stage wrote (its pages and the `WORKLOG.md` tick) as its own docs commit, on the branch the work is on. calcombre reviews only committed pages, so an uncommitted page is one the user cannot comment on. |
 | `STATUS.md` | Milestones and where things stand only, with pointers. No task checklists in it. |
 | A question for the user that needs more than yes or no (`[USER_INPUT]`, a technical fork) | A decision block on the page it belongs to, usually `plan.md`. The options, your recommendation, and why. |
 | A settled question | The block's opening line becomes `.decided`, folded, with the answer written in. The options stay visible. |

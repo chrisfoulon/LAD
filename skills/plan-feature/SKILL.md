@@ -49,7 +49,7 @@ what keeps the current session honest. Give it front matter (`title: "Plan — <
 **If the project uses calcombre** (`lad-standards`, "Where working files go"), each `[USER_INPUT]`
 that needs more than a yes or no is also a decision block in `plan.md`, next to its task: the
 options, your recommendation and why. Once answered, turn it into a `.decided` block with the answer
-written in. Tick the plan box of the feature's task in `WORKLOG.md`.
+written in. Tick the plan box of the feature's task in `WORKLOG.md`, and commit `plan.md` (and any sub-plans) with that tick.
 
 ## 2. Review the plan critically
 
