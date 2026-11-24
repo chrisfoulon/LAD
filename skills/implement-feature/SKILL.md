@@ -30,6 +30,11 @@ takes seconds and prevents building on something that moved or was never there.
 If the context or the requirement turns out to be unclear, stop and ask rather than picking an
 interpretation. State what you found, what is ambiguous, and what the candidate readings are.
 
+**Get onto the feature branch before the first code change.** If you are on the default branch,
+create `feat/<slug>` from it (`git switch -c feat/<slug>`), or switch to it if it exists. Kickoff and
+plan may have committed their working files on the default branch; that is fine, they are docs. Code
+never is.
+
 ## The loop
 
 For each task, in order.
