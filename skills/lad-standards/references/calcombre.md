@@ -86,6 +86,8 @@ marks them finished:
 
 ## Without calcombre
 
-Nothing on this page applies: LAD follows the project's own development-docs convention. Keep the
-`title:` front matter in LAD's templates, which costs nothing and lets the files render with Quarto
-if the project ever adds it. Do not add a Quarto project to a project that has none.
+Nothing on this page applies: LAD follows the project's own development-docs convention, asks its
+questions in the chat, and prunes after asking. Keep the `title:` and `status: current` front
+matter in LAD's templates anyway: it costs nothing, the files render with Quarto, and a project that
+later joins calcombre can take them in unchanged. Do not add a Quarto project to a project that has
+none.

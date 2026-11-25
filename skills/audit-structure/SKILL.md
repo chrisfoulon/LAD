@@ -159,6 +159,7 @@ question of which fixes to take is a decision block at the top of the page.
 ```markdown
 ---
 title: "Structural audit — <area>"
+status: current
 date: <YYYY-MM-DD>
 ---
 

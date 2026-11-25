@@ -141,6 +141,7 @@ changed the Request, flag the change rather than editing it silently.
 ```markdown
 ---
 title: "Context — <slug>"
+status: current
 ---
 
 # Context — <slug>

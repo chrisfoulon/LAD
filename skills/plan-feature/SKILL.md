@@ -43,7 +43,7 @@ Mark tasks needing a decision from the user with `[USER_INPUT]` and say what the
 
 Register the tasks with `TaskCreate`, when the session has it, so progress survives across sessions, and write the same
 breakdown to `<docs>/<slug>/plan.md` — the file is what you check off and read later; the task list is
-what keeps the current session honest. Give it front matter (`title: "Plan — <slug>"`), as
+what keeps the current session honest. Give it front matter (`title: "Plan — <slug>"`, `status: current`), as
 `context.md` has.
 
 **If the project uses calcombre** (`lad-standards`, "Where working files go"), each `[USER_INPUT]`
