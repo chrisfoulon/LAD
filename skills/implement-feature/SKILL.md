@@ -115,6 +115,10 @@ sub-plan. `AskUserQuestion` suits this well. **Wait for the answer.** The checkp
 an agent's judgement that things are going fine is precisely what needs external verification; a
 checkpoint you answer yourself is not a checkpoint.
 
+In a calcombre project the checkpoint is a decision block on `plan.md` (or the WORKLOG task), not a
+chat question: the user may be reading on the site, away from the session. Commit it so it can be
+reviewed, then wait for the answer there (`calcombre wait-review` waits for it).
+
 On approval, commit with a Conventional Commit message describing what changed. Never commit a red
 suite.
 
