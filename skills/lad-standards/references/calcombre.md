@@ -74,11 +74,13 @@ marks them finished:
 
 - **The record is a page in the page folder** (a decision record, or an ADR page there): set
   `status: superseded` and `superseded_by: <the record's path, relative to the page folder>` in each
-  working file's front matter. calcombre checks that the target exists and treats the file as
+  working file's front matter: `decisions/<slug>.md`, not `docs/decisions/<slug>.md`. calcombre checks that the target exists and treats the file as
   retired.
 - **The record is outside the page folder** (an ADR file such as `.codebase-memory/adr.md`):
   `superseded_by` cannot point there, so keep `status: current` and make the first line under the
   title `**Finished <YYYY-MM-DD>.** Its decisions are recorded in <path>.`
+- If the record lists the working files under `sources:`, those paths are relative to the
+  **repository root** (`docs/<slug>/plan.md`), unlike `superseded_by`. Never start one with `../`.
 - Either way, repoint `STATUS.md` and `WORKLOG.md` to the record rather than the plan: calcombre
   flags a watched file that names a superseded page.
 

@@ -79,6 +79,7 @@ that belongs in the code.
 ```markdown
 ---
 title: "<slug>"
+status: current
 ---
 
 # <slug>
@@ -134,7 +135,8 @@ a long time, propose retiring them.
 
 ## 5. Prune
 
-Once the record is written, propose removing the working files:
+**In a calcombre project, skip this step: nothing is deleted; see "In a calcombre project"
+below.** Elsewhere, once the record is written, propose removing the working files:
 
 - `<docs>/<slug>/plan.md`, `context.md`, `plan_*.md`, `split.md`
 
@@ -156,7 +158,10 @@ If the project uses calcombre (`lad-standards`, "Where working files go"), three
 - **Do not delete the working files: mark them finished instead.** Step 5 is replaced by this.
   `status: superseded` with `superseded_by` pointing to the record when the record is a page; else a
   "Finished" first line naming where the record is. Details in `references/calcombre.md`,
-  "Pruning".
+  "Pruning", including which folder each path is relative to.
+- **When the feature is one box of a larger WORKLOG task**, fold its LAD stage boxes (and any
+  decided block under them) into the ticked box, one line pointing to the record. The task stays in
+  `WORKLOG.md` until all its boxes are ticked, and only then is a `done.md` line owed.
 
 ## Report
 

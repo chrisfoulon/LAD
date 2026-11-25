@@ -64,7 +64,7 @@ them as one queue is how the wrong thing gets fixed first.
 ## 4. Fix in cycles
 
 Work in small rounds — plan a batch, implement, verify, then decide with the user. Register the
-batch with `TaskCreate` so an interrupted session can resume.
+batch with `TaskCreate` (when available; else in the plan file) so an interrupted session can resume.
 
 **Per round:**
 

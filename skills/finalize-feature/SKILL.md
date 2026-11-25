@@ -13,7 +13,7 @@ in the diff. Assume there is one.
 
 ```bash
 pytest -q --tb=short 2>&1 | tail -n 100
-pytest --cov=<module> --cov-report=term-missing 2>&1 | tail -n 40
+pytest --cov=<package dir, e.g. src/pkg> --cov-report=term-missing 2>&1 | tail -n 40
 flake8 --statistics
 ```
 

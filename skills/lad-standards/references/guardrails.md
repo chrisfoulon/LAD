@@ -146,6 +146,18 @@ assumption that a vendor has fixed it.
   proceed without a sample, label the fixture as assumed and flag it in your report — never let an
   assumption pass as verified.
 
+### G010 — Count a recorded number on the thing it describes
+
+**Status**: confirmed · **First seen**: 2026-11-25 · **Last seen**: 2026-11-25 · **Seen on**: not recorded
+
+- **Symptom**: a number written into a doc or a registry (a count, a percentage) was computed on a
+  stand-in: a related flag, an earlier rule, a re-implementation, rather than on the stored output
+  it describes. It reads right and can stay wrong for months (one stood from 2026-09-21 to
+  2026-11-25, on five pages).
+- **Trigger**: the stand-in is already loaded and the real output takes another step to produce.
+- **Do instead**: compute the number from the artefact a reader would check it against, and say in
+  the doc what it was computed from. Running the documented example on real data is what caught it.
+
 ## Retired
 
 *(none yet)*
