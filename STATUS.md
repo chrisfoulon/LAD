@@ -95,7 +95,7 @@ Note: `/reload-plugins` reports `0 skills` for this plugin. Cosmetic — that co
 - [x] **First full LAD run in a calcombre project passed** (a Python research project, one feature
       2026-11-18 to 11-25, all five stages, merged). Detection, pages,
       WORKLOG boxes, stage commits, branch and keep-not-prune all worked. Gaps it found are fixed
-      (commits 64873bf to de919cf); calcombre path crash filed (report afa907). It also caught a
+      (commits e3d98c7 to 9e54f83); a calcombre path crash was reported upstream. It also caught a
       wrong recorded count, now guardrail G010.
 - [ ] v2 is unproven in daily use. The open question is whether the nine skills are the right
       seams, which only using them on a real feature will answer. Watch for stages that get skipped
